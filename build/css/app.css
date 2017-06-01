@@ -1,0 +1,46 @@
+body {
+	margin: 0 2% 0;
+}
+
+.game {
+	display: inline-block;
+	float: left;
+	width: 70%;
+}
+
+.players {
+	width: 20%;
+	color: red;
+	display: inline-block;
+	float: right;
+}
+
+.board {
+	display: flex;
+	flex-direction: column;
+}
+
+#row0, #row1, #row2 {
+	width: 80%;
+	margin: 2%;
+	height: 40%;
+	color: red;
+	display: flex;
+}
+
+
+
+.square {
+	width: 7rem;
+	height: 7rem;
+	margin: auto;
+	border: solid black;
+}
+
+.rowcontainer {
+	/*display: flex;*/
+/*	align-content: center;
+	justify-content: center;
+	flex-direction: column;*/
+}
+
