@@ -1,8 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Board from 'app/models/board_model';
+import Board from 'app/collections/board_collection';
 import Player from 'app/models/player_model';
+import Space from 'app/models/space_model';
 
 const Game = Backbone.Model.extend({
   defaults: {
@@ -12,13 +13,34 @@ const Game = Backbone.Model.extend({
     currentPlayer: '',
     playCounter: 0,
     board: ''
+    // board: function() {
+    // var spaces = new Array();
+    // console.log(spaces);
+    // for (var i = 0; i < 3; i++)
+    // {
+    //   for (var n = 0; n < 3; n++)
+    //   {
+    //     var space = new Space({row: i, col: n});
+    //     spaces.push(space);
+    //   }
+    // }
+    // var board = new Board(spaces);
+  // }, 
+
+  // defaults: function(){
+  //   return {
+  //     board: 'nothing',
+  //     player1: '',
+  //     player2: ''
+  //   };
   }, 
 
   initialize: function(options) {
-    this.board = new Board();
     this.set("player1", options.player1);
     this.set("player2", options.player2);
-    console.log('new game! ' + this.get("player1").attributes.name);  
+    // this.set("board", new Board());
+    console.log('new game! ' + this.get("player1").attributes.name);
+    console.log('new board?' + this.get("board"));  
     return this;
   }, 
 
@@ -39,7 +61,28 @@ setCurrentPlayer: function( player ) {
     {   
       this.set("currentPlayer", player);
     };
-  }, 
+  },
+
+setBoard: function() {
+    // var spaces = new Array();
+    // console.log(spaces);
+    // for (var i = 0; i < 3; i++)
+    // {
+    //   for (var n = 0; n < 3; n++)
+    //   {
+    //     var space = new Space({row: i, col: n});
+    //     spaces.push(space);
+    //   }
+    // }
+    // this.board = new Board(spaces);
+    // for (var i = 0; i< spaces.length; i++)
+    // {
+    //   console.log(spaces[i]);
+    //   // this.board.add(space);
+    // }
+    // console.log(this.board);
+  },
+
 }); 
 
 export default Game;

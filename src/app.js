@@ -1,11 +1,13 @@
 import $ from 'jquery';    
 import Backbone from 'backbone';    
 import _ from 'underscore';   
-import Game from 'app/models/game_model';    
-import Board from 'app/models/board_model';    
+import Game from 'app/models/game_model';
+import Space from 'app/models/space_model';    
+import Board from 'app/collections/board_collection';
 import Player from 'app/models/player_model';   
 import GameView from 'app/views/game_view';    
 import PlayerView from 'app/views/player_view';   
+
 var testPlayers = [   
   {
     name: "Bugs Bunny",
@@ -23,8 +25,15 @@ $(document).ready(function() {
   var player1 = new Player({name: testPlayers[0].name, mark: testPlayers[0].mark});   
   var player2 = new Player({name: testPlayers[1].name, mark: testPlayers[1].mark});
   var game = new Game({player1: player1, player2: player2});
+  
+  var space = new Space({row: 'x', col: 'y'});
+
+
+  // game.setBoard();
+  // console.log(game.board);
    
-  console.log('no currentPlayer ' + game.attributes.currentPlayer);   
+
+
   var gameview = new GameView(   
     {   
       model: Game,   
@@ -48,6 +57,6 @@ $(document).ready(function() {
   });
    
   game.currentPlayer = player1;
-  board.render();   
+  gameview.render();   
   p1.render();   
 });    

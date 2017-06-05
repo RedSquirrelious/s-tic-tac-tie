@@ -13,7 +13,7 @@ const Player = Backbone.Model.extend({
 
   initialize: function(options) {
     this.set("name", options.name);
-    this.mark("mark", options.mark);
+    this.set("mark", options.mark);
     console.log('new Player created: ' + this.get("name"));
   }
   // , 

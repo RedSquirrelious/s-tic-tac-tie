@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Board from 'app/models/board_model';
+
 import Player from 'app/models/player_model';
 
 const PlayerView = Backbone.View.extend({
