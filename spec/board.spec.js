@@ -6,7 +6,7 @@ describe( "Board", function() {
 
   beforeEach(  function() { 
     var spaces = [ { row: 'x', col: 'y' }, { row: 'z', col: 'a' } ];
-    board = new Board(  spaces );
+    board = new Board( spaces );
    } );
 
   it( 'should create a board object', function() { 
