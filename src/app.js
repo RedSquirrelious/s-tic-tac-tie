@@ -3,7 +3,7 @@ import Backbone from 'backbone';
 import _ from 'underscore';   
 import Game from 'app/models/game_model';
 import Space from 'app/models/space_model';    
-import Board from 'app/collections/board_collection';
+import Board from 'app/models/board_model';
 import Player from 'app/models/player_model';   
 import GameView from 'app/views/game_view';    
 import PlayerView from 'app/views/player_view';   
@@ -22,16 +22,23 @@ var testPlayers = [
 ];
 
 $(document).ready(function() {
-  var player1 = new Player({name: testPlayers[0].name, mark: testPlayers[0].mark});   
-  var player2 = new Player({name: testPlayers[1].name, mark: testPlayers[1].mark});
-  var game = new Game({player1: player1, player2: player2});
+  var player1 = new Player();
+  player1.setName(testPlayers[0].name);
+  player1.setMark(testPlayers[0].mark);
+
+  var player2 = new Player();
+  player2.setName(testPlayers[1].name);
+  player2.setMark(testPlayers[1].mark);
+
+  var game = new Game();
   
-  var space = new Space({row: 'x', col: 'y'});
-
-
   // game.setBoard();
   // console.log(game.board);
-   
+   game.board.grid[0][0].setMark(player2.mark);
+   console.log(game.board.grid[0][0].mark);
+
+    console.log(player1.mark);
+  console.log(game.checkWinStatus());
 
 
   var gameview = new GameView(   

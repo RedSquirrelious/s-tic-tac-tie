@@ -11,9 +11,19 @@ const Player = Backbone.Model.extend({
     };
   }, 
 
-  initialize: function(options) {
-    this.name = options.name;
-    this.mark = options.mark;
+  initialize: function() {
+  },
+
+  setName: function(name) {
+    this.name = name;
+  },
+
+  setMark: function(mark) {
+    this.mark = mark;
+  },
+
+  playSpace: function(space) {
+    space.mark = this.mark;
   }
 
 }); 
