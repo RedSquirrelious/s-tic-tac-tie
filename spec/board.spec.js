@@ -1,24 +1,51 @@
-import Board from 'app/collections/board_collection';
-import Space from 'app/models/space_model';
+import Board from 'app/models/board_model';
 
-describe( "Board", function() { 
+describe('Board', function() {
   var board;
+  var grid;
+  var test;
 
-  beforeEach(  function() { 
-    var spaces = [ { row: 'x', col: 'y' }, { row: 'z', col: 'a' } ];
-    board = new Board( spaces );
-   } );
+  beforeEach(function() {
+    board = new Board();
+    test = board.grid;
+  });
 
-  it( 'should create a board object', function() { 
-    expect( board.length ).toEqual( 2 );
-   } );
+  it('should allow itself to be created', function() {
+    expect(board).toBeDefined();
+  });
 
-  it( 'should have models inside', function() { 
-    expect( board.model ).toBeDefined();
-   } );
+  it('should have a grid', function() {
+    expect(board.grid).toBeDefined();
+  });
 
-  it( 'should access the ids of its spaces', function() { 
-    expect( board.first().id ).toEqual( 'rowxcoly' );
-    expect( board.at( 1 ).id ).toEqual( 'rowzcola' );
-   } )
- } );
+  it('should know it has 3 rows', function() {
+    expect(board.grid.length).toEqual(3);
+  });
+
+  it('should know it has 3 columns in each row', function() {
+    var test = board.grid;
+    expect(test[0].length).toEqual(3);
+    expect(test[1].length).toEqual(3);
+    expect(test[2].length).toEqual(3);        
+  });
+
+  it('should allow you to set a mark in one of its spaces', function() {
+    test[0][0].setMark('x');
+    expect(test[0][0].mark).toEqual('x');
+  });
+
+  it('should return a row', function() {
+    test[0][0].setMark('x');
+    test[0][1].setMark('o');
+    test[0][2].setMark('x');
+    expect(board.returnRow(0)).toEqual(['x', 'o', 'x']);
+  });
+
+  it('should return a col', function() {
+    test[0][0].setMark('o');
+    test[1][0].setMark('x');
+    test[2][0].setMark('o');
+    expect(board.returnCol(0)).toEqual(['o', 'x', 'o']);
+  });
+
+});
