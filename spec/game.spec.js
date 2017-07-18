@@ -133,7 +133,7 @@ describe('Game', function() {
     expect(game.checkWinStatus(0,0)).toEqual('in progress');
   });
 
-    xit('should return in-progress status when playCounter < 5 and no match', function() {
+  it('should return in-progress status when playCounter < 5 and no match', function() {
       game.takeTurns(0,0);
       game.takeTurns(1,1);
       game.takeTurns(0,1);
@@ -141,6 +141,32 @@ describe('Game', function() {
       game.takeTurns(0,2);
       // game.takeTurns(1,0);
     expect(game.checkWinStatus(0,0)).toEqual('in progress');
+    expect(game.checkWinStatus(0,0)).not.toEqual(`${player1.name} won!`);
+  });
+
+  it('should return a message with winners name status when appropriate and playCounter < 5', function() {
+      game.takeTurns(0,0);
+      game.takeTurns(1,1);
+      game.takeTurns(0,1);
+      game.takeTurns(1,1);
+      game.takeTurns(0,2);
+      game.takeTurns(1,0);
+    expect(game.checkWinStatus(0,0)).toEqual(`${game.currentPlayer.name} won!`);
+  });
+
+  it('should return a message with winners name status when appropriate and playCounter < 5', function() {
+      game.takeTurns(0,0); //player1
+      game.takeTurns(1,1);
+      game.takeTurns(0,1); //player1
+      game.takeTurns(0,2);
+      game.takeTurns(2,2); //player1
+      game.takeTurns(1,0);
+      game.takeTurns(1,2); //player1
+      game.takeTurns(1, 2);
+    expect(game.checkWinStatus(1,1)).not.toEqual('in progress');
+    expect(game.checkWinStatus(1,1)).toEqual(`${game.currentPlayer.name} won!`);
+    expect(game.checkWinStatus(1, 1)).toEqual(`${game.player2.name} won!`);
+    expect(game.checkWinStatus(0,0)).not.toEqual(`${game.player1.name} won!`);
   });
 
 }); 

@@ -54,24 +54,28 @@ const Game = Backbone.Model.extend({
   takeTurns: function(row, col, firstPlay=false ) {
     var space = this.board.grid[row][col];
     space.setMark(this.currentPlayer.mark);
+    var status = this.checkWinStatus(row, col);
 
-    if (this.currentPlayer == this.player1)
+    if (status == 'in progress')
     {
-      this.setCurrentPlayer(this.player2);
-    }
-    else
-    {
-      this.setCurrentPlayer(this.player1);
-    }
+      if (this.currentPlayer == this.player1)
+      {
+        this.setCurrentPlayer(this.player2);
+      }
+      else
+      {
+        this.setCurrentPlayer(this.player1);
+      }
 
-    if (firstPlay)
-    {
-      this.set('playCounter', 1);
-    }
-    else
-    {
-      var count = this.get('playCounter');
-      this.set('playCounter', count + 1);
+      if (firstPlay)
+      {
+        this.set('playCounter', 1);
+      }
+      else
+      {
+        var count = this.get('playCounter');
+        this.set('playCounter', count + 1);
+      }
     }
 
   },
