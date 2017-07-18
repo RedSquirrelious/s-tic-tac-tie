@@ -26,19 +26,16 @@ $(document).ready(function() {
   player1.setName(testPlayers[0].name);
   player1.setMark(testPlayers[0].mark);
 
+  console.log(`Player1 mark: ${player1.mark}`)
   var player2 = new Player();
   player2.setName(testPlayers[1].name);
   player2.setMark(testPlayers[1].mark);
-
+console.log(`Player2 mark: ${player2.mark}`)
   var game = new Game();
   
-  // game.setBoard();
-  // console.log(game.board);
-   game.board.grid[0][0].setMark(player2.mark);
-   console.log(game.board.grid[0][0].mark);
 
-    console.log(player1.mark);
-  console.log(game.checkWinStatus());
+  var rowTest = game.board.grid[0];
+  
 
 
   var gameview = new GameView(   

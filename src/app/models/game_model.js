@@ -11,7 +11,7 @@ const Game = Backbone.Model.extend({
     player1: null,
     player2: null,
     currentPlayer: null,
-    // playCounter: 0,
+    playCounter: 0,
     board: null
     };
   }, 
@@ -28,17 +28,53 @@ const Game = Backbone.Model.extend({
     this.player2 = player2;
   },
 
-  setCurrentPlayer: function( player, firstPlay=false ) { 
+  setCurrentPlayer: function( player) { 
     this.currentPlayer = player;
-    if (!firstPlay)
-    {
-      this.board.playCounter += 1;
-    }
     },
+
+  checkWinStatus: function(row, col) {
+    if (this.get('playCounter') >= 5)
+    {
+      var rowStatus = this.board.reportMatch(row, 'row', this.currentPlayer.mark);
+      var colStatus = this.board.reportMatch(col, 'col', this.currentPlayer.mark);
+
+      if (rowStatus == true || colStatus == true)
+      {
+        var status = `${this.currentPlayer.name} won!`;
+        this.set('winStatus', status);
+      }
+    }
+    return this.returnWinStatus();
+  }, 
 
   returnWinStatus: function() {
     return this.get('winStatus');
 },
+
+  takeTurns: function(row, col, firstPlay=false ) {
+    var space = this.board.grid[row][col];
+    space.setMark(this.currentPlayer.mark);
+
+    if (this.currentPlayer == this.player1)
+    {
+      this.setCurrentPlayer(this.player2);
+    }
+    else
+    {
+      this.setCurrentPlayer(this.player1);
+    }
+
+    if (firstPlay)
+    {
+      this.set('playCounter', 1);
+    }
+    else
+    {
+      var count = this.get('playCounter');
+      this.set('playCounter', count + 1);
+    }
+
+  },
 
 }); 
 

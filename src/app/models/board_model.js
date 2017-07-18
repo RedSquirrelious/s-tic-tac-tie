@@ -7,69 +7,76 @@ import Space from 'app/models/space_model';
 
 const Board = Backbone.Model.extend({
   defaults: {
-    grid: [],
-    row1: [],
-    row2: [],
-    row3: [],
-    playCounter: 0,
+    grid: []
   },
 
   initialize: function() {
-    this.grid = this.makeSpaces();
+    this.grid = this.makeAllSpaces();
 },
 
-  makeSpaces: function() {
-    var grid = [];
+makeRow: function() {
+  var row = [];
+
+  for (var i = 0; i < 3; i++)
+  {
+    var space = new Space();
+    row.push(space);
+  }
+  return row;
+},
+
+
+makeAllSpaces: function() {
+  var grid = [];
+  for (var i = 0; i < 3; i++)
+  {
+    var row = this.makeRow();
+    grid.push(row);
+  }
+  return grid;
+},
+
+
+
+  returnRow: function(rowNumber) {
+    var that = this;
+    var row = [];
     for (var i = 0; i < 3; i++)
     {
-      var arr = new Array();
-      for (var n = 0; n < 3; n++)
-      {
-        var space = new Space();
-        arr.push(space);
-      }
-      grid.push(arr);
-    }
-    return grid;
-  },
-
-  makeRows: function() {
-    var row = [];
-    for(var i = 0; i < 3; i++)
-    {
-      var space = new Space();
-      row.push(space);
+      row.push(that.grid[rowNumber][i].get('mark'));
     }
     return row;
-  },
-  
-  returnRow: function(rowNumber) {
-    var rowGrid = this.grid;
-    var showRow = [];
-    for (var i = 0; i < 3; i++)
-    {
-      showRow.push(rowGrid[rowNumber][i].mark)
-    }
-    return showRow;
   },
 
   returnCol: function(colNumber) {
     var that = this;
-    var showCol = [];
+    var col = [];
     for (var i = 0; i < 3; i++)
     {
-      showCol.push(that.grid[i][colNumber].mark);
+      col.push(that.grid[i][colNumber].get('mark'));
     }
-    return showCol;
+    return col;
   },
 
-  checkWinStatus: function() {
-    if (playCounter >= 5)
-    {
+  reportEvery(line, val) {
+    return line.every(lineVal => val === lineVal);
+  },
 
+  reportMatch: function(num, type, val) {
+    var test;
+    if (type == 'col')
+    {
+      var col = this.returnCol(num);
+      test = this.reportEvery(col, val);
     }
-    return null;
-  }
+    else
+    {
+      var row = this.returnRow(num);
+      test = this.reportEvery(row, val);
+    }
+    return test;    
+  },
+
 
 });
 
