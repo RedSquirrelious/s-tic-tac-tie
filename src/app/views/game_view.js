@@ -65,14 +65,14 @@ const GameView = Backbone.View.extend({
     console.log($(input));
     var squareElement = '#' + input; 
     $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
-    this.fillSquare('div.mark');
+    this.fillSquare('div.mark', 'img');
   },
 
-    fillSquare: function(item) {
-    var fillClass = ($(item).height() > $(item).width()) 
+    fillSquare: function(container, item) {
+    var fillClass = ($(container).height() > $(container).width()) 
     ? 'fillheight'
     : 'fillwidth';
-    $(item).find('img').addClass(fillClass);
+    $(container).find(item).addClass(fillClass);
     // console.log(item);
   },
 

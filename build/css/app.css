@@ -60,3 +60,6 @@ div.mark {
   border-width: 0.25vw;
 }
 
+.win {
+  background-color: pink;
+}
