@@ -14,7 +14,7 @@ const GameView = Backbone.View.extend({
   },
 
   events: { 
-  'click .square': 'markSquare'
+  'click .square': 'play'
   },
 
   render: function() {
@@ -27,17 +27,17 @@ const GameView = Backbone.View.extend({
     grass: "images/squirrel-grass.jpg",
     rocks: "images/squirrel-rocks.jpg",
     snow: "images/squirrel-snow.jpg",
-    bugs: "images/Bugs_Bunny.png",
-    elmer: "images/Elmer_Fudd.gif",
-    sam: "images/Yosemite_Sam.png",
-    daffy: "images/Daffy_Duck.png",
-    porky: "images/Porky_Pig.png",
-    marvin: "images/Marvin_the_Martian.png",
-    coyote: "images/Wile_E._Coyote.png",
-    roadrunner: "images/Roadrunner.png"
+    bugs: "images/Bugs_Bunny.jpg",
+    elmer: "images/Elmer_Fudd.jpg",
+    sam: "images/Yosemite_Sam.jpg",
+    daffy: "images/Daffy_Duck.jpg",
+    porky: "images/Porky_Pig.jpg",
+    marvin: "images/Marvin_the_Martian.jpg",
+    coyote: "images/Wile_E._Coyote.jpg",
+    roadrunner: "images/Roadrunner.jpg"
   },
 
-  markSquare: function(event) {
+  play: function(event) {
     var that = this;
     if (this.currentGame.returnWinStatus() != 'in progress')
     {
@@ -47,12 +47,11 @@ const GameView = Backbone.View.extend({
     {
       if ($(event.currentTarget).has('.mark').length)
       { 
-        alert("This Square Already Has a Mark!  Try Another Square!"); 
+        alert("This square already has a mark!  Try another square!"); 
       } 
       else 
       { 
-        var squareElement = '#' + event.target.id; 
-        $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
+        this.markSquare(event.target.id);
         var row = event.target.id[3];
         var col = event.target.id[7];
         this.addMarkToSpace(row, col, this.currentGame.currentPlayer.mark);
@@ -61,6 +60,66 @@ const GameView = Backbone.View.extend({
       };
     }
   },
+
+  markSquare: function(input) {
+    console.log($(input));
+    var squareElement = '#' + input; 
+    $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
+    this.fillSquare('div.mark');
+  },
+
+    fillSquare: function(item) {
+    var fillClass = ($(item).height() > $(item).width()) 
+    ? 'fillheight'
+    : 'fillwidth';
+    $(item).find('img').addClass(fillClass);
+    // console.log(item);
+  },
+
+
+  // fillSquare: function() {
+  //   var fillClass = ($('div.mark').height() > $('div.mark').width()) 
+  //   ? 'fillheight'
+  //   : 'fillwidth';
+  //   $('div.mark').find('img').addClass(fillClass);
+  // },
+
+  //   fillSquare: function() {
+  //   $('div.mark').each(function() {
+  //   console.log($(this).width());
+  //   console.log($(this).height());
+  //   // var fillClass = 'fillsomething';
+  //   var fillClass = ($(this).height() > $(this).width()) 
+  //   ? 'fillheight'
+  //   : 'fillwidth';
+  //   $(this).find('img').addClass(fillClass);
+  //   });
+  // },
+
+  // markSquare: function(event) {
+  //   var that = this;
+  //   if (this.currentGame.returnWinStatus() != 'in progress')
+  //   {
+  //     alert("This game is already over!");
+  //   }
+  //   else
+  //   {
+  //     if ($(event.currentTarget).has('.mark').length)
+  //     { 
+  //       alert("This Square Already Has a Mark!  Try Another Square!"); 
+  //     } 
+  //     else 
+  //     { 
+  //       var squareElement = '#' + event.target.id; 
+  //       $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
+  //       var row = event.target.id[3];
+  //       var col = event.target.id[7];
+  //       this.addMarkToSpace(row, col, this.currentGame.currentPlayer.mark);
+  //       this.checkWin(row, col, this.currentGame.currentPlayer.mark);
+  //       this.takeTurns();
+  //     };
+  //   }
+  // },
 
   takeTurns: function() {
     if (this.currentGame.currentPlayer == this.currentGame.player1) 

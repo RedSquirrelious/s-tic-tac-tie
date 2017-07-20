@@ -1,42 +1,43 @@
-body {
-margin: 0 2% 0;
+header {
+  margin: 1vw;
 }
 
+main {
+  height: 100%;
+  width: auto;
+}
 
-
-.game {
-  display: inline-block;
-  float: left;
-  /*width: 70%;*/
+#game {
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
 }
 
 #players {
   display: flex;
   align-items: center;
   flex-direction: column;
-
 }
 
+
 #board {
-  display: flex;
-  flex-direction: column;
-  /*height: 90%;*/
+  width: 100%;
+}
+
+.fillwidth { 
+  width: 100%; 
+  height: auto; 
+}
+.fillheight { 
+  height: 100%; 
+  width: auto; 
 }
 
 div.mark {
-  display: flex;
-  /*align-items: center;*/
+  overflow: hidden;
+  height: 11vw;
+  width: 11vw;
 }
-
-div.mark img {
-  /*height: 8.5rem;*/
-  height: auto;
-  width: auto;
-  margin: auto;
-  margin-top: 0.5rem;
-}
-
-
 
 
 .row-container ul {
@@ -48,9 +49,14 @@ div.mark img {
 }
 
 .row-container ul li  {
-  width: 10rem;
-  height: 10rem;
-  margin: 0.5rem;
+  width: 13vw;
+  height: 13vw;
+  margin: 0.5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   border: solid black;
+  border-width: 0.25vw;
 }
 
