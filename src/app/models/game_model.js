@@ -38,12 +38,15 @@ const Game = Backbone.Model.extend({
   checkWinStatus: function(row, col, mark) {
     var rowStatus = this.board.reportMatch(row, 'row', mark);
     var colStatus = this.board.reportMatch(col, 'col', mark);
-    if (rowStatus == true || colStatus == true)
+    var leftDiagonalStatus = this.board.reportMatch(0, 'leftDiagonal', mark);
+    var rightDiagonalStatus = this.board.reportMatch(0, 'rightDiagonal', mark);
+    if (rowStatus == true || colStatus == true || leftDiagonalStatus == true || rightDiagonalStatus == true)
     {
       var status = `${this.currentPlayer.name} won!`;
       this.set('winStatus', status);
     }  
-    // return this.returnWinStatus();
+    return this.returnWinStatus();
+    
   }, 
 
   returnWinStatus: function() {

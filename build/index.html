@@ -12,21 +12,21 @@
   </head>
   <body>
     <header>
-        <h1>Tic Tac Toe</h1>
+        <h5>Tic-Tac-Toe</h5>
     </header>
     <nav>
         <ul>
        <!--      <li class="new-game button">New Game</li> -->
         </ul>
     </nav>
-        <main>
-          <section id=players>
-              <h2>Players</h2>
-              <div id='player-list'>
-              </div>
+        <main class='small-12 medium-12 large-9 small-centered columns'>
+          <section id=players class='row'>
+              <!-- <h2>Players</h2> -->
+              <h2 id='player-list'>
+              </h2>
           </section>
-          <section id="game">
-            <div id="board">
+          <section id="game" class='row'>
+            <div id='board'>
                 <section class="row-container">
 
                     <ul id='row0'>
@@ -63,12 +63,12 @@
       </main>
 <!-- UNDERSCORE TEMPLATES -->
       <script type='text/template' id='player-list-template'>
-          <h4><%- name %></h4>
+          <h2><%- name %></h2>
 
       </script>
 
       <script type='text/template' id='board-template'>
-<!--       <ul class="row0">
+      <ul class="row0">
           <li><%- row0col0 %></li>
           <li><%- row0col1 %></li>
           <li><%- row0col2 %></li>
@@ -82,7 +82,7 @@
           <li><%- row2col0 %></li>
           <li> <%- row2col1 %></li>
           <li> <%- row2col2 %></li>
-      </ul> -->
+      </ul>
       </script>
 
     <script src="/app.bundle.js" charset="utf-8"></script>

@@ -64,6 +64,20 @@ describe('Board', function() {
     expect(board.returnCol(0)).toEqual(['o', 'x', 'o']);
   });
 
+  it('should return the contents of the left diagonal', function() {
+    grid[2][0].setMark('x');
+    grid[1][1].setMark('o');
+    grid[0][2].setMark('x');
+    expect(board.returnRightDiagonal()).toEqual(['x', 'o', 'x']);
+  });
+
+  it('should return the contents of the right diagonal', function() {
+    grid[0][0].setMark('o');
+    grid[1][1].setMark('x');
+    grid[2][2].setMark('o');
+    expect(board.returnLeftDiagonal()).toEqual(['o', 'x', 'o']);
+  });
+
   it('should show a new board has null columns', function() {
     expect(board.returnCol(0)).toEqual([null, null, null]);
     expect(board.returnCol(1)).toEqual([null, null, null]);
@@ -116,5 +130,51 @@ describe('Board', function() {
     grid[2][0].setMark('o');
     expect(board.reportMatch(0, 'col', 'x')).toEqual(false);
   });  
+
+  it('should report if an empty left diagonal is really empty', function() {
+    expect(board.reportMatch(0, 'leftDiagonal', null)).toEqual(true);
+  });
+
+   it('should report if a left diagonal with one item is not all nulls (empty)', function() {
+    board.grid[0][0].setMark('x');
+    expect(board.reportMatch(0, 'leftDiagonal', null)).toEqual(false);
+  });
+
+   it('should report if a left diagonal with Xs are all Xs', function() {
+    grid[0][0].setMark('x');
+    grid[1][1].setMark('x');
+    grid[2][2].setMark('x');
+    expect(board.reportMatch(0, 'leftDiagonal', 'x')).toEqual(true);
+  }); 
+
+  it('should report NO if a left diagonal with 2 Xs and 1 O are all Xs', function() {
+    grid[0][0].setMark('o');
+    grid[1][1].setMark('x');
+    grid[2][2].setMark('o');
+    expect(board.reportMatch(0, 'leftDiagonal', 'x')).toEqual(false);
+  }); 
+
+    it('should report if an empty right diagonal is really empty', function() {
+    expect(board.reportMatch(0, 'rightDiagonal', null)).toEqual(true);
+  });
+
+   it('should report if a right diagonal with one item is not all nulls (empty)', function() {
+    board.grid[0][2].setMark('x');
+    expect(board.reportMatch(0, 'rightDiagonal', null)).toEqual(false);
+  });
+
+   it('should report if a right diagonal with Xs are all Xs', function() {
+    grid[0][2].setMark('x');
+    grid[1][1].setMark('x');
+    grid[2][0].setMark('x');
+    expect(board.reportMatch(0, 'rightDiagonal', 'x')).toEqual(true);
+  }); 
+
+  it('should report NO if a right diagonal with 2 Xs and 1 O are all Xs', function() {
+    grid[0][2].setMark('o');
+    grid[1][1].setMark('x');
+    grid[2][0].setMark('o');
+    expect(board.reportMatch(0, 'rightDiagonal', 'x')).toEqual(false);
+  }); 
 
 });

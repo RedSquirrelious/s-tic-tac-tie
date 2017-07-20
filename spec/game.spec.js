@@ -144,7 +144,7 @@ describe('Game', function() {
     expect(game.checkWinStatus(0,0)).not.toEqual(`${player1.name} won!`);
   });
 
-  it('should return a message with winners name status when appropriate and playCounter < 5', function() {
+  xit('should return a message with winners name status when appropriate and playCounter < 5', function() {
       game.takeTurns(0,0);
       game.takeTurns(1,1);
       game.takeTurns(0,1);
@@ -154,7 +154,7 @@ describe('Game', function() {
     expect(game.checkWinStatus(0,0)).toEqual(`${game.currentPlayer.name} won!`);
   });
 
-  it('should return a message with winners name status when appropriate and playCounter < 5', function() {
+  xit('should return a message with winners name status when appropriate and playCounter < 5', function() {
       game.takeTurns(0,0); //player1
       game.takeTurns(1,1);
       game.takeTurns(0,1); //player1

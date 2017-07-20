@@ -38,28 +38,28 @@ const GameView = Backbone.View.extend({
   },
 
   markSquare: function(event) {
-  var that = this;
-  if (this.currentGame.returnWinStatus() != 'in progress')
-  {
-    alert("This game is already over!");
-  }
-  else
-  {
-    if ($(event.currentTarget).has('.mark').length)
-    { 
-      alert("This Square Already Has a Mark!  Try Another Square!"); 
-    } 
-    else { 
-      var squareElement = '#' + event.target.id; 
-      $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
-      var row = event.target.id[3];
-      var col = event.target.id[7];
-      this.addMarkToSpace(row, col, this.currentGame.currentPlayer.mark);
-
-      this.checkWin(row, col, this.currentGame.currentPlayer.mark);
-      this.takeTurns();
-    };
-  }
+    var that = this;
+    if (this.currentGame.returnWinStatus() != 'in progress')
+    {
+      alert("This game is already over!");
+    }
+    else
+    {
+      if ($(event.currentTarget).has('.mark').length)
+      { 
+        alert("This Square Already Has a Mark!  Try Another Square!"); 
+      } 
+      else 
+      { 
+        var squareElement = '#' + event.target.id; 
+        $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
+        var row = event.target.id[3];
+        var col = event.target.id[7];
+        this.addMarkToSpace(row, col, this.currentGame.currentPlayer.mark);
+        this.checkWin(row, col, this.currentGame.currentPlayer.mark);
+        this.takeTurns();
+      };
+    }
   },
 
   takeTurns: function() {
