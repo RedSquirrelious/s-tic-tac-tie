@@ -11,56 +11,49 @@ import PlayerView from 'app/views/player_view';
 var testPlayers = [   
   {
     name: "Bugs Bunny",
-    mark: "squirrel-grass.jpg"   
+    mark: "images/squirrel-grass.jpg"   
   }, {
-  //   name: "Elmer Fudd",
-  //   mark: "squirrel-rocks.jpg"
-  // }, {
+    name: "Elmer Fudd",
+    mark: "images/squirrel-rocks.jpg"
+  }, {
     name:"Yosemite Sam",
-    mark: "squirrel-snow.jpg"   
+    mark: "images/squirrel-snow.jpg"   
   }    
 ];
 
 $(document).ready(function() {
-  var player1 = new Player();
-  player1.setName(testPlayers[0].name);
-  player1.setMark(testPlayers[0].mark);
-
-  console.log(`Player1 mark: ${player1.mark}`)
-  var player2 = new Player();
-  player2.setName(testPlayers[1].name);
-  player2.setMark(testPlayers[1].mark);
-console.log(`Player2 mark: ${player2.mark}`)
   var game = new Game();
-  
-
-  var rowTest = game.board.grid[0];
-  
-
-
   var gameview = new GameView(   
     {   
-      model: Game,   
-      template: _.template($('#board-template').html()),   
       el: $('#game'),
+      model: Game,   
+      template: _.template($('#board-template').html()),
+      currentGame: game 
     }   
   );
+
+  var player1 = new Player();
+  player1.setName(testPlayers[0].name);
+  player1.setMark(gameview.markImages.bugs);
+
+
+
+  var player2 = new Player();
+  player2.setName(testPlayers[1].name);
+  player2.setMark(gameview.markImages.elmer);
+
+
+  game.addPlayers(player1, player2);
+  game.setCurrentPlayer(player1);
    
   var p1 = new PlayerView({
     el: $('#player-list'),
-    model: player1,
-    template: _.template($('#player-list-template').html()),
-    player: player1   
-  });
-   
-  var p2 = new PlayerView({
-    el: $('#player-list'),
     model: Player,
     template: _.template($('#player-list-template').html()),
-    player: player2   
+    player1: player1,
+    player2: player2   
   });
    
-  game.currentPlayer = player1;
   gameview.render();   
   p1.render();   
 });    

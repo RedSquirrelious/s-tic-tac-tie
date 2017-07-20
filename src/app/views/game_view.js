@@ -4,6 +4,7 @@ import _ from 'underscore';
 
 import Player from 'app/models/player_model';
 import Game from 'app/models/game_model';
+
 const GameView = Backbone.View.extend({
   
   initialize: function(options) {
@@ -24,7 +25,8 @@ const GameView = Backbone.View.extend({
 
   markImages: {
     grass: "images/squirrel-grass.jpg",
-    rocks: "images/squirrel-rocks-c.jpg",
+    rocks: "images/squirrel-rocks.jpg",
+    snow: "images/squirrel-snow.jpg",
     bugs: "images/Bugs_Bunny.png",
     elmer: "images/Elmer_Fudd.gif",
     sam: "images/Yosemite_Sam.png",
@@ -37,33 +39,56 @@ const GameView = Backbone.View.extend({
 
   markSquare: function(event) {
   var that = this;
-  console.log(event.target.id);
-    
-  //watches for clicks on the board squares
+  if (this.currentGame.returnWinStatus() != 'in progress')
+  {
+    alert("This game is already over!");
+  }
+  else
+  {
+    if ($(event.currentTarget).has('.mark').length)
+    { 
+      alert("This Square Already Has a Mark!  Try Another Square!"); 
+    } 
+    else { 
+      var squareElement = '#' + event.target.id; 
+      $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
+      var row = event.target.id[3];
+      var col = event.target.id[7];
+      this.addMarkToSpace(row, col, this.currentGame.currentPlayer.mark);
 
-  // $('.row-container').children().children().on('click', function() { 
-
-  //checks to see if an image/mark is in there already & stops them if there is
-  if ($('#' + event.target.id).has('.mark').length) { 
-    alert("This Square Already Has a Mark!  Try Another Square!"); 
-  } 
-  else { 
-    var squareElement = '#' + event.target.id + ' p'; 
-    $(squareElement).append('<section class="mark"><img src=' + this.model.currentPlayer.attributes.mark + '></section>');};
-    this.takeTurns();
+      this.checkWin(row, col, this.currentGame.currentPlayer.mark);
+      this.takeTurns();
+    };
+  }
   },
 
-
   takeTurns: function() {
-    $('#board h2').append('<h4>' + this.checkWinStatus + '</h4>');
-    if (this.model.currentPlayer == this.model.attributes.player1) 
+    if (this.currentGame.currentPlayer == this.currentGame.player1) 
     {
-      this.model.currentPlayer = this.model.attributes.player2;
+      this.currentGame.currentPlayer = this.currentGame.player2;
     } 
-    else if (this.model.currentPlayer == this.model.attributes.player2 ) 
+    else
     {
-      this.model.currentPlayer = this.model.attributes.player1;
+      this.currentGame.currentPlayer = this.currentGame.player1;
     };
+  },
+
+  addMarkToSpace: function(row, col, mark) {
+    var space = this.currentGame.board.grid[row][col];
+    space.setMark(mark);
+    this.currentGame.playCounter += 1;
+  },
+
+  checkWin: function(row, col, mark) {
+    if (this.currentGame.playCounter >= 5)
+    {
+      this.currentGame.checkWinStatus(row, col, mark)
+      console.log(`Counter: ${this.currentGame.playCounter}`);
+    }
+    if (this.currentGame.returnWinStatus() != 'in progress')
+    {
+      alert(this.currentGame.returnWinStatus());
+    }
   } 
 });
 

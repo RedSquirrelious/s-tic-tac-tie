@@ -5,21 +5,24 @@ import Board from 'app/models/board_model';
 import Player from 'app/models/player_model';
 
 const Game = Backbone.Model.extend({
-  defaults: function() {
-    return {
+  defaults: 
+  // function() {
+  //   return 
+  {
     winStatus: 'in progress',
     player1: null,
     player2: null,
     currentPlayer: null,
     playCounter: 0,
     board: null
-    };
+    // };
   }, 
 
   events: {},
 
   initialize: function() {
     this.board = new Board();
+    this.playCounter = 0;
     return this;
   }, 
   
@@ -28,23 +31,19 @@ const Game = Backbone.Model.extend({
     this.player2 = player2;
   },
 
-  setCurrentPlayer: function( player) { 
+  setCurrentPlayer: function(player) { 
     this.currentPlayer = player;
     },
 
-  checkWinStatus: function(row, col) {
-    if (this.get('playCounter') >= 5)
+  checkWinStatus: function(row, col, mark) {
+    var rowStatus = this.board.reportMatch(row, 'row', mark);
+    var colStatus = this.board.reportMatch(col, 'col', mark);
+    if (rowStatus == true || colStatus == true)
     {
-      var rowStatus = this.board.reportMatch(row, 'row', this.currentPlayer.mark);
-      var colStatus = this.board.reportMatch(col, 'col', this.currentPlayer.mark);
-
-      if (rowStatus == true || colStatus == true)
-      {
-        var status = `${this.currentPlayer.name} won!`;
-        this.set('winStatus', status);
-      }
-    }
-    return this.returnWinStatus();
+      var status = `${this.currentPlayer.name} won!`;
+      this.set('winStatus', status);
+    }  
+    // return this.returnWinStatus();
   }, 
 
   returnWinStatus: function() {

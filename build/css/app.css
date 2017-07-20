@@ -1,46 +1,52 @@
 body {
-	margin: 0 2% 0;
+margin: 0 2% 0;
 }
 
 .game {
-	display: inline-block;
-	float: left;
-	width: 70%;
+  display: inline-block;
+  float: left;
+  width: 70%;
 }
 
 .players {
-	width: 20%;
-	color: red;
-	display: inline-block;
-	float: right;
+  height: 20%;
+  width: 20%;
+  color: red;
+  display: inline-block;
+  float: right;
 }
 
 .board {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
 }
 
-#row0, #row1, #row2 {
-	width: 80%;
-	margin: 2%;
-	height: 40%;
-	color: red;
-	display: flex;
+div.mark {
+  display: flex;
+  align-content: center;
 }
 
-
-
-.square {
-	width: 7rem;
-	height: 7rem;
-	margin: auto;
-	border: solid black;
+div.mark img {
+  height: 8.5rem;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.rowcontainer {
-	/*display: flex;*/
-/*	align-content: center;
-	justify-content: center;
-	flex-direction: column;*/
+.row-container ul {
+  list-style: none;
+  display: flex;
+  align-content: center;
+  vertical-align: middle;
+  justify-content: center;
+  margin: 0;
+}
+
+.row-container ul li  {
+  width: 9rem;
+  height: 9rem;
+  margin: 0.5rem;
+  border: solid black;
 }
 
