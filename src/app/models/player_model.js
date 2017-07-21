@@ -24,7 +24,7 @@ const Player = Backbone.Model.extend({
 
   playSpace: function(space) {
     space.mark = this.mark;
-  }
+  },
 
  markImages: {
     grass: 'images/squirrel-grass.jpg',
