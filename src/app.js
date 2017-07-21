@@ -6,7 +6,7 @@ import Space from 'app/models/space_model';
 import Board from 'app/models/board_model';
 import Player from 'app/models/player_model';   
 import GameView from 'app/views/game_view';    
-import PlayerView from 'app/views/player_view';   
+import PlayerView from 'app/views/player_view'; 
 
 var testPlayers = [   
   {
@@ -22,8 +22,9 @@ var testPlayers = [
 ];
 
 $(document).ready(function() {
+
   var game = new Game();
-  var gameview = new GameView(   
+  var board = new GameView(   
     {   
       el: $('#game'),
       model: Game,   
@@ -33,14 +34,13 @@ $(document).ready(function() {
   );
 
   var player1 = new Player();
-  player1.setName(testPlayers[0].name);
-  player1.setMark(gameview.markImages.bugs);
-
+  player1.setName(player1.names.elmer);
+  player1.setMark(player1.markImages.elmer);
 
 
   var player2 = new Player();
-  player2.setName(testPlayers[1].name);
-  player2.setMark(gameview.markImages.elmer);
+  player2.setName(player2.names.roadrunner);
+  player2.setMark(player2.markImages.roadrunner);
 
 
   game.addPlayers(player1, player2);
@@ -54,6 +54,6 @@ $(document).ready(function() {
     player2: player2   
   });
    
-  gameview.render();   
+  board.render();   
   p1.render();   
 });    

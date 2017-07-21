@@ -10,6 +10,7 @@ const Game = Backbone.Model.extend({
   //   return 
   {
     winStatus: 'in progress',
+    winner: null,
     player1: null,
     player2: null,
     currentPlayer: null,
@@ -34,6 +35,10 @@ const Game = Backbone.Model.extend({
   setCurrentPlayer: function(player) { 
     this.currentPlayer = player;
     },
+
+  setWinner: function(player) {
+    this.winner = player;
+  },
 
   checkWinStatus: function(row, col, mark) {
     var rowStatus = this.board.reportMatch(row, 'row', mark);
