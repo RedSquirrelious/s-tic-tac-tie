@@ -7,6 +7,8 @@ import Board from 'app/models/board_model';
 import Player from 'app/models/player_model';   
 import GameView from 'app/views/game_view';    
 import PlayerView from 'app/views/player_view'; 
+import ChoiceList from 'app/models/choice_list_model';
+import ChoiceListView from 'app/views/choice_list_view';    
 
 var testPlayers = [   
   {
@@ -22,6 +24,13 @@ var testPlayers = [
 ];
 
 $(document).ready(function() {
+
+  var choiceList = new ChoiceList();
+  var appView = new ChoiceListView({
+    el: $('#choices'),
+    model: ChoiceList,
+    template: _.template($('#choice-list-template').html()),
+  });
 
   var game = new Game();
   var board = new GameView(   
