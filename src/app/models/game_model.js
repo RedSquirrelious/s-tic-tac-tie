@@ -10,6 +10,7 @@ const Game = Backbone.Model.extend({
   //   return 
   {
     winStatus: 'in progress',
+    winner: null,   
     player1: null,
     player2: null,
     currentPlayer: null,
@@ -46,12 +47,11 @@ const Game = Backbone.Model.extend({
       this.set('winStatus', status);
     }  
     return this.returnWinStatus();
-    
   }, 
 
   returnWinStatus: function() {
     return this.get('winStatus');
-},
+  },
 
   takeTurns: function(row, col, firstPlay=false ) {
     var space = this.board.grid[row][col];

@@ -7,6 +7,9 @@ import Board from 'app/models/board_model';
 import Player from 'app/models/player_model';   
 import GameView from 'app/views/game_view';    
 import PlayerView from 'app/views/player_view';   
+import ChoiceList from 'app/models/choice_list_model';
+import ChoiceListView from 'app/views/choice_list_view';    
+
 
 var testPlayers = [   
   {
@@ -22,6 +25,15 @@ var testPlayers = [
 ];
 
 $(document).ready(function() {
+
+  var choiceList = new ChoiceList();
+  var choiceView = new ChoiceListView({
+    el: $('#choices'),
+    model: ChoiceList,
+    template: _.template($('#choice-list-template').html()),
+    choiceList: choiceList
+  });
+
   var game = new Game();
   var gameview = new GameView(   
     {   
@@ -35,7 +47,6 @@ $(document).ready(function() {
   var player1 = new Player();
   player1.setName(testPlayers[0].name);
   player1.setMark(gameview.markImages.bugs);
-
 
 
   var player2 = new Player();
@@ -53,7 +64,7 @@ $(document).ready(function() {
     player1: player1,
     player2: player2   
   });
-   
+  choiceView.render(); 
   gameview.render();   
   p1.render();   
 });    

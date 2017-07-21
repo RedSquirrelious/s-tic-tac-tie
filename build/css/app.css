@@ -1,9 +1,20 @@
 header {
   margin: 1vw;
+  z-index: 9;
 }
 
 main {
   height: 100%;
+  width: auto;
+  z-index: 1;  
+}
+
+ul#choices {
+  list-style: none;
+}
+
+#choices li img{
+  height: 10vw;
   width: auto;
 }
 
@@ -17,11 +28,21 @@ main {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 50vw;
 }
 
+#player-list {
+  width: 100%;
+}
+
+#list h2{
+  display: flex;
+  justify-content: center;
+}
 
 #board {
   width: 100%;
+  position: relative;
 }
 
 .fillwidth { 
@@ -60,3 +81,21 @@ div.mark {
   border-width: 0.25vw;
 }
 
+.overlay {
+  z-index: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+li.button {
+  z-index: 10;
+}
+
+.winner {
+  color: red;
+  font-weight: bold;
+}

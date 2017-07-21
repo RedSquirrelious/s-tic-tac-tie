@@ -14,8 +14,7 @@ const PlayerView = Backbone.View.extend({
   },
       
   render: function() {
-    // var html = this.template({name: this.player1.name, row0: this.player1.attributes.row0});
-    var html = this.template({name: this.player1.name + ' vs. ' + this.player2.name});
+    var html = this.template({nameP1: this.player1.name, nameP2: this.player2.name});
     this.$el.html(html);
     this.delegateEvents();
     return this;

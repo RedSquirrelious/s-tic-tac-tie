@@ -11,17 +11,25 @@
 
   </head>
   <body>
-    <header>
-        <h5>Tic-Tac-Toe</h5>
-    </header>
-    <nav>
-        <ul>
-       <!--      <li class="new-game button">New Game</li> -->
+    <nav class='top-bar'>
+      <ul class='title-area'>
+        <li><h5>Tic-Tac-Toe</h5></li>
+      </ul>
+      <section class='top-bar-section'>
+<!--         <ul class='left'>
+          <li class="new-game button">New Game</li>
+        </ul> -->
+
+        <ul class='dropdown menu' data-dropdown-menu>
+          <li>
+            <div id='choices' class='menu'></div>
+          </li>
         </ul>
+
+      </section>
     </nav>
         <main class='small-12 medium-12 large-9 small-centered columns'>
           <section id=players class='row'>
-              <!-- <h2>Players</h2> -->
               <h2 id='player-list'>
               </h2>
           </section>
@@ -63,28 +71,32 @@
       </main>
 <!-- UNDERSCORE TEMPLATES -->
       <script type='text/template' id='player-list-template'>
-          <h2><%- name %></h2>
-
+          <div id='list' class='row'>
+            <h2 id='player1' class='small-12 large-5 columns'><%- nameP1 %></h2>
+            <h2 class='small-12 large-2 columns'>vs.</h2>
+            <h2 id='player2' class='small-12 large-5 columns'><%- nameP2 %></h2>
+          </div>
       </script>
-
       <script type='text/template' id='board-template'>
-      <ul class="row0">
-          <li><%- row0col0 %></li>
-          <li><%- row0col1 %></li>
-          <li><%- row0col2 %></li>
-      </ul>
-      <ul class="row1">
-          <li><%- row1col0 %> </li>
-          <li><%- row1col1 %></li>
-          <li><%- row1col2 %></li>
-      </ul>
-      <ul class="row2">
-          <li><%- row2col0 %></li>
-          <li> <%- row2col1 %></li>
-          <li> <%- row2col2 %></li>
-      </ul>
+        <ul class="row0">
+            <li><%- row0col0 %></li>
+            <li><%- row0col1 %></li>
+            <li><%- row0col2 %></li>
+        </ul>
+        <ul class="row1">
+            <li><%- row1col0 %> </li>
+            <li><%- row1col1 %></li>
+            <li><%- row1col2 %></li>
+        </ul>
+        <ul class="row2">
+            <li><%- row2col0 %></li>
+            <li> <%- row2col1 %></li>
+            <li> <%- row2col2 %></li>
+        </ul>
       </script>
-
+      <script type='text/template' id='choice-list-template'>
+        <ul class='menu'><%- choiceList %></ul>
+      </script>
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
 </html>
