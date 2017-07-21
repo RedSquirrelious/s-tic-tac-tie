@@ -16,12 +16,11 @@
     </header>
     <nav>
         <ul>
-       <!--      <li class="new-game button">New Game</li> -->
+            <li class="new-game button">New Game</li>
         </ul>
     </nav>
         <main class='small-12 medium-12 large-9 small-centered columns'>
           <section id=players class='row'>
-              <!-- <h2>Players</h2> -->
               <h2 id='player-list'>
               </h2>
           </section>
@@ -63,7 +62,11 @@
       </main>
 <!-- UNDERSCORE TEMPLATES -->
       <script type='text/template' id='player-list-template'>
-          <h2><%- name %></h2>
+          <div id='list' class='row'>
+            <h2 id='player1' class='small-12 large-5 columns'><%- nameP1 %></h2>
+            <h2 class='small-12 large-2 columns'>vs.</h2>
+            <h2 id='player2' class='small-12 large-5 columns'><%- nameP2 %></h2>
+          </div>
 
       </script>
 
@@ -84,6 +87,8 @@
           <li> <%- row2col2 %></li>
       </ul>
       </script>
+
+
 
     <script src="/app.bundle.js" charset="utf-8"></script>
   </body>
