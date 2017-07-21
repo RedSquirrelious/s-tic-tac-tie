@@ -4,6 +4,7 @@ import _ from 'underscore';
 
 import Player from 'app/models/player_model';
 
+
 const PlayerView = Backbone.View.extend({
     
   initialize: function(options) {

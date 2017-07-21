@@ -10,6 +10,7 @@ import PlayerView from 'app/views/player_view';
 import ChoiceList from 'app/models/choice_list_model';
 import ChoiceListView from 'app/views/choice_list_view';    
 
+
 var testPlayers = [   
   {
     name: "Bugs Bunny",
@@ -26,10 +27,11 @@ var testPlayers = [
 $(document).ready(function() {
 
   var choiceList = new ChoiceList();
-  var appView = new ChoiceListView({
+  var choiceView = new ChoiceListView({
     el: $('#choices'),
     model: ChoiceList,
     template: _.template($('#choice-list-template').html()),
+    choiceList: choiceList
   });
 
   var game = new Game();
@@ -38,7 +40,7 @@ $(document).ready(function() {
       el: $('#game'),
       model: Game,   
       template: _.template($('#board-template').html()),
-      currentGame: game 
+      currentGame: game, 
     }   
   );
 
@@ -62,7 +64,8 @@ $(document).ready(function() {
     player1: player1,
     player2: player2   
   });
-   
+  
+  choiceView.render(); 
   board.render();   
   p1.render();   
 });    

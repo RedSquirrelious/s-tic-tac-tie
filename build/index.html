@@ -11,13 +11,22 @@
 
   </head>
   <body>
-    <header>
-        <h5>Tic-Tac-Toe</h5>
-    </header>
-    <nav>
-        <ul>
-            <li class="new-game button">New Game</li>
+    <nav class='top-bar'>
+      <ul class='title-area'>
+        <li><h5>Tic-Tac-Toe</h5></li>
+      </ul>
+      <section class='top-bar-section'>
+<!--         <ul class='left'>
+          <li class="new-game button">New Game</li>
+        </ul> -->
+
+        <ul class='dropdown menu' data-dropdown-menu>
+          <li>
+            <div id='choices' class='menu'></div>
+          </li>
         </ul>
+
+      </section>
     </nav>
         <main class='small-12 medium-12 large-9 small-centered columns'>
           <section id=players class='row'>
@@ -89,10 +98,11 @@
       </script>
 
         <script type='text/template' id='choice-list-template'>
-        <ul><%- choiceList %></ul>
+        <ul class='menu'><%- choiceList %></ul>
       </script>
 
 
     <script src="/app.bundle.js" charset="utf-8"></script>
+
   </body>
 </html>

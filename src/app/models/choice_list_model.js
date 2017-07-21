@@ -2,6 +2,11 @@ import Backbone from 'backbone';
 
 const ChoiceList = Backbone.Model.extend({
 
+  initialize: function() {
+    this.list = this.showChoices();
+    return this;
+  },
+
   markImages: {
     grass: 'images/squirrel-grass.jpg',
     rocks: 'images/squirrel-rocks.jpg',
@@ -9,7 +14,7 @@ const ChoiceList = Backbone.Model.extend({
     bugs: 'images/Bugs_Bunny.jpg',
     elmer: 'images/Elmer_Fudd.jpg',
     sam: 'images/Yosemite_Sam.jpg',
-    porky: 'images/Daffy_Duck.jpg',
+    daffy: 'images/Daffy_Duck.jpg',
     porky: 'images/Porky_Pig.jpg',
     marvin: 'images/Marvin_the_Martian.jpg',
     coyote: 'images/Wile_E._Coyote.jpg',
@@ -30,34 +35,21 @@ const ChoiceList = Backbone.Model.extend({
     roadrunner: 'Roadrunner'
   },
 
-  choices: 
-    [
-    {name: this.names.bugs, mark: this.markImages.bugs},
-    {name: this.names.coyote, mark: this.markImages.coyote},
-    {name: this.names.daffy, mark: this.markImages.daffy},
-    {name: this.names.elmer, mark: this.markImages.elmer},
-    {name: this.names.grass, mark: this.markImages.grass},
-    {name: this.names.marvin, mark: this.markImages.marvin},
-    {name: this.names.porky, mark: this.markImages.porky},
-    {name: this.names.roadrunner, mark: this.markImages.roadrunner},
-    {name: this.names.rocks, mark: this.markImages.rocks},
-    {name: this.names.sam, mark: this.markImages.sam},
-    {name: this.names.snow, mark: this.markImages.snow}
-    ]
-
-  // choices: {
-  //   bugs: {name: this.names.bugs, mark: this.markImages.bugs},
-  //   coyote: {name: this.names.coyote, mark: this.markImages.coyote},
-  //   daffy: {name: this.names.daffy, mark: this.markImages.daffy},
-  //   elmer: {name: this.names.elmer, mark: this.markImages.elmer},
-  //   grass: {name: this.names.grass, mark: this.markImages.grass},
-  //   marvin: {name: this.names.marvin, mark: this.markImages.marvin},
-  //   porky: {name: this.names.porky, mark: this.markImages.porky},
-  //   roadrunner: {name: this.names.roadrunner, mark: this.markImages.roadrunner},
-  //   rocks: {name: this.names.rocks, mark: this.markImages.rocks},
-  //   sam: {name: this.names.sam, mark: this.markImages.sam},
-  //   snow: {name: this.names.snow, mark: this.markImages.snow}
-  // }
+  showChoices: function() {
+    var that = this;
+    return {
+      bugs: {name: that.names.bugs, mark: that.markImages.bugs},
+      coyote: {name: that.names.coyote, mark: that.markImages.coyote},
+      daffy: {name: that.names.daffy, mark: that.markImages.daffy},
+      elmer: {name: that.names.elmer, mark: that.markImages.elmer},
+      marvin: {name: that.names.marvin, mark: that.markImages.marvin},
+      porky: {name: that.names.porky, mark: that.markImages.porky},
+      roadrunner: {name: that.names.roadrunner, mark: that.markImages.roadrunner},
+      sam: {name: that.names.sam, mark: that.markImages.sam},
+      // grass: {name: that.names.grass, mark: that.markImages.grass},
+      // rocks: {name: that.names.rocks, mark: that.markImages.rocks},
+      // snow: {name: that.names.snow, mark: that.markImages.snow}
+  }},
 
 });
 

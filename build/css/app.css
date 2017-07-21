@@ -9,6 +9,15 @@ main {
   z-index: 1;
 }
 
+ul#choices {
+  list-style: none;
+}
+
+#choices li img{
+  height: 10vw;
+  width: auto;
+}
+
 #game {
   display: flex;
   align-content: center;

@@ -5,6 +5,7 @@ import _ from 'underscore';
 import Player from 'app/models/player_model';
 import Game from 'app/models/game_model';
 
+
 const GameView = Backbone.View.extend({
   
   initialize: function(options) {
@@ -20,7 +21,6 @@ const GameView = Backbone.View.extend({
   render: function() {
     var that = this;
     this.delegateEvents();
-    // this.proclaimWin();
     return this;
   },
 
