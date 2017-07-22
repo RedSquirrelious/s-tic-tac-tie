@@ -25,21 +25,21 @@ const GameView = Backbone.View.extend({
   },
 
   winImage: {
-    won: "images/winner.jpg"
+    won: "assets/winner.jpg"
   },
 
-  markImages: {
-    grass: "images/squirrel-grass.jpg",
-    rocks: "images/squirrel-rocks.jpg",
-    snow: "images/squirrel-snow.jpg",
-    bugs: "images/Bugs_Bunny.jpg",
-    elmer: "images/Elmer_Fudd.jpg",
-    sam: "images/Yosemite_Sam.jpg",
-    daffy: "images/Daffy_Duck.jpg",
-    porky: "images/Porky_Pig.jpg",
-    marvin: "images/Marvin_the_Martian.jpg",
-    coyote: "images/Wile_E._Coyote.jpg",
-    roadrunner: "images/Roadrunner.jpg"
+  markassets: {
+    grass: "assets/squirrel-grass.jpg",
+    rocks: "assets/squirrel-rocks.jpg",
+    snow: "assets/squirrel-snow.jpg",
+    bugs: "assets/Bugs_Bunny.jpg",
+    elmer: "assets/Elmer_Fudd.jpg",
+    sam: "assets/Yosemite_Sam.jpg",
+    daffy: "assets/Daffy_Duck.jpg",
+    porky: "assets/Porky_Pig.jpg",
+    marvin: "assets/Marvin_the_Martian.jpg",
+    coyote: "assets/Wile_E._Coyote.jpg",
+    roadrunner: "assets/Roadrunner.jpg"
   },
 
   play: function(event) {

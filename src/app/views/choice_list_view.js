@@ -13,6 +13,11 @@ const ChoiceListView = Backbone.View.extend({
     this.template = options.template;
   },
 
+  events: {
+    'click img': 'pickCharacter'
+
+  },
+
   render: function() {
     this.listChoices();
     return this;
@@ -23,10 +28,22 @@ const ChoiceListView = Backbone.View.extend({
     console.log(this.el);
     for (var choice in choices)
     {
-      var html = '<li><img src=' + choices[choice].mark + '></li>';
+      var name = choices[choice].name.toLowerCase();
+      var choiceId = name.replace(/\s+/g, '_');
+      var html = '<li><img id="' + choiceId + '" src=' + choices[choice].mark + '></li>';
       this.el.append(html);
       console.log(choices[choice].name);
       console.log(choices[choice].mark);
+    }
+  },
+
+  pickCharacter: function(event) {
+    if (event.target.id != 'logo')
+    { 
+      $(event.target).addClass('picked');
+      var choices = this.choiceList.showChoices();
+      var choice = choices[event.target.id];
+      console.log(choice);
     }
   }
 });
