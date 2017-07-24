@@ -25,61 +25,58 @@ const GameView = Backbone.View.extend({
   },
 
   winImage: {
+    draw: 'assets/draw.jpg',
     won: "assets/winner.jpg"
   },
 
   play: function(event) {
-    var that = this;
-    if (this.model.returnWinStatus() != 'in progress')
+    var player = this.model.currentPlayer;
+    if (player.mark != undefined)
     {
-      alert("This game is already over!");
-    }
+      if (this.model.returnWinStatus() != 'in progress')
+      {
+        alert("This game is already over!");
+      }
     else
-    {
-      if ($(event.currentTarget).has('.mark').length)
-      { 
-        alert("This square already has a mark!  Try another square!"); 
-      } 
-      else 
-      { 
-        this.markSquare(event.target.id);
-        var row = event.target.id[3];
-        var col = event.target.id[7];
-        this.addMarkToSpace(row, col, this.model.currentPlayer.mark);
-        this.checkWin(row, col, this.model.currentPlayer.mark);
-        this.takeTurns();
-      };
+      {
+        if ($(event.currentTarget).has('.mark').length)
+        { 
+          alert("This square already has a mark!  Try another square!"); 
+        } 
+        else 
+        { 
+          this.markSquare(event.target.id);
+          var row = event.target.id[3];
+          var col = event.target.id[7];
+          this.tallyMark(row, col, player.mark);
+          this.checkWin(row, col, player.mark);
+          this.model.takeTurns();
+        };
+      }
     }
   },
 
   markSquare: function(input) {
-    console.log($(input));
-    var squareElement = '#' + input; 
-    $(squareElement).append("<div class='mark'><img src=" + this.model.currentPlayer.mark + "></div>");
+    var squareElement = '#' + input;
+    var markImage = $('<img></img>');
+    var markDiv = $('<div></div>');
+    markImage.attr('src', this.model.currentPlayer.mark);
+    markDiv.addClass('mark').append(markImage);
+    $(squareElement).append(markDiv);
     this.fillSquare('div.mark', 'img');
   },
 
-    fillSquare: function(container, item) {
+  fillSquare: function(container, item) {
     var fillClass = ($(container).height() > $(container).width()) 
     ? 'fillheight'
     : 'fillwidth';
     $(container).find(item).addClass(fillClass);
-    // console.log(item);
   },
 
-  takeTurns: function() {
-    if (this.model.currentPlayer == this.model.player1) 
-    {
-      this.model.currentPlayer = this.model.player2;
-    } 
-    else
-    {
-      this.model.currentPlayer = this.model.player1;
-    };
-  },
 
-  addMarkToSpace: function(row, col, mark) {
+  tallyMark: function(row, col, mark) {
     var space = this.model.board.grid[row][col];
+    $('#prompt').hide();
     space.setMark(mark);
     this.model.playCounter += 1;
   },
@@ -87,21 +84,28 @@ const GameView = Backbone.View.extend({
   checkWin: function(row, col, mark) {
     if (this.model.playCounter >= 5)
     {
+      if (this.model.playCounter == 9 && this.model.returnWinStatus() == 'in progress')
+      {
+        this.showWinStatus(this.winImage.draw);
+      }
       this.model.checkWinStatus(row, col, mark)
-      console.log(`Counter: ${this.model.playCounter}`);
     }
     if (this.model.returnWinStatus() != 'in progress')
     {
-      console.log(this.model.currentPlayer.name);
-      // alert(this.model.returnWinStatus());
-      this.proclaimWin();
+      this.showWinStatus(this.winImage.won);
+      this.proclaimWinner();
     }
   }, 
 
-  proclaimWin: function() {
+  showWinStatus: function(image) {
+    var win = $('<img></img>');
+    win.attr('class', 'overlay').attr('src', image);
+    $('#row2').append(win);
+  },
+
+  proclaimWinner: function() {
     this.model.setWinner(this.model.currentPlayer);
     this.highlightWinner(this.model.currentPlayer);
-    $('#row2').append(`<img class='overlay' src=${this.winImage.won}>`);
   },
 
   highlightWinner: function(winner) {

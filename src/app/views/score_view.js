@@ -8,6 +8,7 @@ import Game from 'app/models/game_model';
 const ScoreView = Backbone.View.extend({
 
 // model scoreboard?  tracks player wins?
+// somd day....
 
 });
 

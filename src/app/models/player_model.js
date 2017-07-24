@@ -18,7 +18,6 @@ const Player = Backbone.Model.extend({
   },
 
   setName: function(name) {
-    // this.name = name;
     this.set('name', name);
   },
 

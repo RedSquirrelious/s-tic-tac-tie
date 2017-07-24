@@ -1,3 +1,4 @@
+wanted to use foundation-sites plugin, but couldn't get it to cooperate with webpack.
 {
   "name": "tic-tac-toe",
   "version": "1.0.0",

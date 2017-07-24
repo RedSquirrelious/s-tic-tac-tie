@@ -7,8 +7,6 @@ import ChoiceList from 'app/models/choice_list_model';
 
 const Game = Backbone.Model.extend({
   defaults: 
-  // function() {
-  //   return 
   {
     winStatus: 'in progress',
     winner: null,
@@ -18,7 +16,6 @@ const Game = Backbone.Model.extend({
     currentPlayer: null,
     playCounter: 0,
     board: null,
-    // };
   }, 
 
   events: {
@@ -33,24 +30,24 @@ const Game = Backbone.Model.extend({
     return this;
   }, 
 
-  addPlayerPersonas: function(choiceList) {
-    this.playerPersonas = choiceList;
-  },
+  // addPlayerPersonas: function(choiceList) {
+  //   this.playerPersonas = choiceList;
+  // },
   
   addPlayers: function(player1, player2=null) {
     this.player1 = player1;
     this.player2 = player2;
   },
 
-  namePlayer: function(player, name) {
-    if (player = this.player1)
-    {
-      player1.setName(name);
-    }
-    else {
-      player2.setName(name);
-    }
-  },
+  // namePlayer: function(player, name) {
+  //   if (player = this.player1)
+  //   {
+  //     player1.setName(name);
+  //   }
+  //   else {
+  //     player2.setName(name);
+  //   }
+  // },
 
   setCurrentPlayer: function(player) { 
     this.currentPlayer = player;
@@ -58,6 +55,10 @@ const Game = Backbone.Model.extend({
 
   setWinner: function(player) {
     this.winner = player;
+  },
+
+  setWinStatus: function(status) {
+    this.set('winStatus', status);
   },
 
   checkWinStatus: function(row, col, mark) {
@@ -71,38 +72,21 @@ const Game = Backbone.Model.extend({
       this.set('winStatus', status);
     }  
     return this.returnWinStatus();
-    
   }, 
 
   returnWinStatus: function() {
     return this.get('winStatus');
   },
 
-  takeTurns: function(row, col, firstPlay=false ) {
-    var space = this.board.grid[row][col];
-    space.setMark(this.currentPlayer.mark);
-    var status = this.checkWinStatus(row, col);
-
-    if (status == 'in progress')
+  takeTurns: function() {
+    if (this.currentPlayer == this.player1) 
     {
-      if (this.currentPlayer == this.player1)
-      {
-        this.setCurrentPlayer(this.player2);
-      }
-      else
-      {
-        this.setCurrentPlayer(this.player1);
-      }
-      if (firstPlay)
-      {
-        this.set('playCounter', 1);
-      }
-      else
-      {
-        var count = this.get('playCounter');
-        this.set('playCounter', count + 1);
-      }
-    }
+      this.currentPlayer = this.player2;
+    } 
+    else
+    {
+      this.currentPlayer = this.player1;
+    };
   },
 
 }); 

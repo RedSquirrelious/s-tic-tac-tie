@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-// import GameView from 'app/views/game_view';
 import ChoiceList from 'app/models/choice_list_model';
 
 
@@ -14,12 +13,18 @@ const ChoiceListView = Backbone.View.extend({
   },
 
   events: {
-    // 'click img': 'pickCharacter'
+    'click img': 'pickCharacter',
+    'click #logo': 'reloadGame',
+    'mouseenter img': 'highlightHover',
+    'mouseleave img': 'removeHoverEffect'
   },
 
   messages: {
-    urgePick: 'Pick a persona!\n Click on one of the characters above!',
-    tryAgain: 'Oops!  Try again!'
+    howToPick: '  Click on one of the characters above!',
+    urgePick1: 'Pick a persona, Player1!',
+    urgePick2: 'Pick a persona, Player2!',
+    tryAgain: 'Oops!  Try again!',
+    pickedAlready: "You've already picked your character.  Maybe play a square instead?"
   },
 
   render: function() {
@@ -50,27 +55,72 @@ const ChoiceListView = Backbone.View.extend({
     return choiceImage;
   },
 
-  promptPickCharacter: function() {
-    setTimeout(this.addPrompt(), 1000);
+  promptPickCharacter: function(player) {
+
+    setTimeout(this.addPrompt(player), 1000);
   },
 
-  addPrompt: function() {
-    var prompt = this.messages.urgePick;
+  addPrompt: function(player) {
+    var prompt = this.messages.urgePick2;
+    if (player == this.model.parent.player1)
+      { 
+        prompt = this.messages.urgePick1;
+      }
+    prompt += this.messages.howToPick;
     $('#prompt').html(prompt);
   },
 
   pickCharacter: function(event) {
-    if (event.target.id != 'logo' && !$(event.currentTarget).hasClass('picked'))
-    { 
-      $(event.target).addClass('picked');
-      $('#prompt').hide();
-      var pick = event.target.id;
-      return pick;
+    var prompt = $('#prompt');
+    var promptText;
+    if (this.validatePick(this.model.parent.currentPlayer))
+    {
+      if (event.target.id != 'logo' && !$(event.currentTarget).hasClass('picked'))
+      { 
+        var player = this.model.parent.currentPlayer;
+        $(event.target).addClass('picked');
+        prompt.hide();
+        player.setName(event.target.title);
+        player.setMark(event.target.src);
+        this.model.parent.takeTurns();
+        // this.promptPickCharacter('x');
+      }
+      else {
+        promptText = this.messages.tryAgain;
+      }
     }
     else {
-      $('#prompt').show();  
-      $('#prompt').html(this.messages.tryAgain);
+      promptText = this.messages.pickedAlready;
     }
+    if (event.target.id != 'logo')
+    {
+      prompt.show();
+      prompt.html(promptText);
+    }
+  },
+
+  validatePick: function(player) {
+    if (player.get('name') == '?')
+    {
+      return true;
+    }
+    return false;
+  },
+
+// might or might not work depending on browser 
+  highlightHover: function(event) {
+    console.log($(event.target));
+    $(event.target).addClass('maybeChoose');
+  },
+
+  removeHoverEffect: function(event) {
+    $(event.target).removeClass('maybeChoose');
+  },
+
+  // DOES NOT BELONG HERE BUT.... WILL GO HERE UNTIL I SPLIT GAMEVIEW INTO BOARD.... 
+  // AND NEST CHOICELISTVIEW AND BOARDVIEW INTO GAMEVIEW, THEN WILL GO INTO GAMEVIEW
+  reloadGame: function() {
+    location.reload();
   }
 
 });
