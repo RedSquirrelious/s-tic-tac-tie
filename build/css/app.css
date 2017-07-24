@@ -122,11 +122,28 @@ li.button {
   z-index: 10;
 }
 
-.winner {
+.highlight {
   color: red;
   font-weight: bold;
 }
 
 .picked {
-  border: solid purple;
+  border: solid green;
 }
+
+.score {
+  margin-top: 4vw;
+}
+
+.score h4 {
+  text-decoration: underline;
+}
+
+
+#scoreP1 h4 {
+  /*margin-top: 4vw;*/
+}
+
+/*.hide {
+  display: none;
+}*/

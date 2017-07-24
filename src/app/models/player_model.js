@@ -4,18 +4,22 @@ import _ from 'underscore';
 
 const Player = Backbone.Model.extend({
     
-  defaults: function(){
-    return {
-      name: '',
+  defaults: {
+      name: '?',
       mark: ''
-    };
   }, 
 
   initialize: function() {
+    this.on('change:name', this.reportNameChange());
+  },
+
+  reportNameChange: function() {
+    console.log(this.get('name'));
   },
 
   setName: function(name) {
-    this.name = name;
+    // this.name = name;
+    this.set('name', name);
   },
 
   setMark: function(mark) {
@@ -52,7 +56,8 @@ const Player = Backbone.Model.extend({
     marvin: 'Marvin the Martian',
     coyote: 'Wile E. Coyote',
     roadrunner: 'Roadrunner'
-  }
+  },
+  
 
 }); 
 
