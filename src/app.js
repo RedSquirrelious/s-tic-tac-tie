@@ -7,19 +7,9 @@ import Board from 'app/models/board_model';
 import Player from 'app/models/player_model';   
 import GameView from 'app/views/game_view';    
 import PlayerView from 'app/views/player_view'; 
+import ChoiceList from 'app/models/choice_list_model';
+import ChoiceListView from 'app/views/choice_list_view';    
 
-var testPlayers = [   
-  {
-    name: "Bugs Bunny",
-    mark: "images/squirrel-grass.jpg"   
-  }, {
-    name: "Elmer Fudd",
-    mark: "images/squirrel-rocks.jpg"
-  }, {
-    name:"Yosemite Sam",
-    mark: "images/squirrel-snow.jpg"   
-  }    
-];
 
 $(document).ready(function() {
 
@@ -27,20 +17,22 @@ $(document).ready(function() {
   var board = new GameView(   
     {   
       el: $('#game'),
-      model: Game,   
-      template: _.template($('#board-template').html()),
-      currentGame: game 
+      // template: _.template($('#board-template').html()),
+      model: game,
+      playerPersonas: game.playerPersonas
     }   
   );
 
+  var choiceView = new ChoiceListView({
+    el: $('#choices'),
+    model: game.playerPersonas,
+    template: _.template($('#choice-list-template').html()),
+  });
+
+  choiceView.promptPickCharacter(player1);
+
   var player1 = new Player();
-  player1.setName(player1.names.elmer);
-  player1.setMark(player1.markImages.elmer);
-
-
   var player2 = new Player();
-  player2.setName(player2.names.roadrunner);
-  player2.setMark(player2.markImages.roadrunner);
 
 
   game.addPlayers(player1, player2);
@@ -48,12 +40,13 @@ $(document).ready(function() {
    
   var p1 = new PlayerView({
     el: $('#player-list'),
-    model: Player,
     template: _.template($('#player-list-template').html()),
     player1: player1,
     player2: player2   
   });
-   
-  board.render();   
-  p1.render();   
+  
+  choiceView.render(); 
+  board.render(); 
+  p1.render();
+
 });    

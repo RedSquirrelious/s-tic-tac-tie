@@ -11,23 +11,25 @@
 
   </head>
   <body>
-    <header>
-        <h5>Tic-Tac-Toe</h5>
-    </header>
-    <nav>
-        <ul>
-            <li class="new-game button">New Game</li>
-        </ul>
+    <nav class='top-bar'>
+      <ul id='choices' class='title-area'>
+        <li><img id='logo' src='assets/tic-tac-toe-logo.jpg' alt='Logo with word Tic-Tac-Toe'></li>
+      </ul>
     </nav>
-        <main class='small-12 medium-12 large-9 small-centered columns'>
-          <section id=players class='row'>
+        <main>
+          <section class='row'>
+            <h5 id='prompt' class='highlight'></h5>
+          </section>
+          <section id='players' class='row'>
               <h2 id='player-list'>
               </h2>
           </section>
-          <section id="game" class='row'>
+          <section id='game' class='row'>
+          <div id='scoreP1' class='score'>
+            <h4>Score</h4>
+          </div>
             <div id='board'>
-                <section class="row-container">
-
+              <section class="row-container">
                     <ul id='row0'>
                         <li id='row0col0' class='square'>
                         </li>
@@ -36,7 +38,7 @@
                         <li id='row0col2' class='square'>
                         </li>
                     </ul>    
-              </section> 
+              </section>  
               <section class="row-container">
                 <ul id='row1'>
                     <li id='row1col0' class='square'>
@@ -56,21 +58,33 @@
                         <li id='row2col2' class='square'>
                         </li>
                     </ul> 
-                  </section>
-              </div> 
-        </section>
+              </section>
+            </div> 
+            <div id='scoreP2' class='score'>
+              <h4>Score</h4>
+            </div>
+          </section>
       </main>
+
+
 <!-- UNDERSCORE TEMPLATES -->
+
+      <script type='text/template' id='prompt-template'>
+        <h2><%- promptP1%></h2>
+        <h2><%- promptP2%></h2>
+      </script>
+
       <script type='text/template' id='player-list-template'>
           <div id='list' class='row'>
             <h2 id='player1' class='small-12 large-5 columns'><%- nameP1 %></h2>
             <h2 class='small-12 large-2 columns'>vs.</h2>
             <h2 id='player2' class='small-12 large-5 columns'><%- nameP2 %></h2>
           </div>
-
       </script>
 
-      <script type='text/template' id='board-template'>
+
+
+<!--       <script type='text/template' id='board-template'>
       <ul class="row0">
           <li><%- row0col0 %></li>
           <li><%- row0col1 %></li>
@@ -86,10 +100,16 @@
           <li> <%- row2col1 %></li>
           <li> <%- row2col2 %></li>
       </ul>
+      </script> -->
+
+
+
+        <script type='text/template' id='choice-list-template'>
+        <ul><%- choiceList %></ul>
       </script>
 
 
-
     <script src="/app.bundle.js" charset="utf-8"></script>
+
   </body>
 </html>

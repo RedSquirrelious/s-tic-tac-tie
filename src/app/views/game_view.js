@@ -5,134 +5,119 @@ import _ from 'underscore';
 import Player from 'app/models/player_model';
 import Game from 'app/models/game_model';
 
+
 const GameView = Backbone.View.extend({
   
   initialize: function(options) {
-    this.template = options.template;
+    // this.template = options.template;
     this.listenTo(this.model, 'change', this.render );
-    this.currentGame = options.currentGame;
+    this.model = options.model;
   },
 
   events: { 
-  'click .square': 'play'
+  'click .square':  'play'
   },
 
   render: function() {
     var that = this;
     this.delegateEvents();
-    // this.proclaimWin();
     return this;
   },
 
   winImage: {
-    won: "images/winner.jpg"
-  },
-
-  markImages: {
-    grass: "images/squirrel-grass.jpg",
-    rocks: "images/squirrel-rocks.jpg",
-    snow: "images/squirrel-snow.jpg",
-    bugs: "images/Bugs_Bunny.jpg",
-    elmer: "images/Elmer_Fudd.jpg",
-    sam: "images/Yosemite_Sam.jpg",
-    daffy: "images/Daffy_Duck.jpg",
-    porky: "images/Porky_Pig.jpg",
-    marvin: "images/Marvin_the_Martian.jpg",
-    coyote: "images/Wile_E._Coyote.jpg",
-    roadrunner: "images/Roadrunner.jpg"
+    draw: 'assets/draw.jpg',
+    won: "assets/winner.jpg"
   },
 
   play: function(event) {
-    var that = this;
-    if (this.currentGame.returnWinStatus() != 'in progress')
+    var player = this.model.currentPlayer;
+    if (player.mark != undefined)
     {
-      alert("This game is already over!");
-    }
+      if (this.model.returnWinStatus() != 'in progress')
+      {
+        alert("This game is already over!");
+      }
     else
-    {
-      if ($(event.currentTarget).has('.mark').length)
-      { 
-        alert("This square already has a mark!  Try another square!"); 
-      } 
-      else 
-      { 
-        this.markSquare(event.target.id);
-        var row = event.target.id[3];
-        var col = event.target.id[7];
-        this.addMarkToSpace(row, col, this.currentGame.currentPlayer.mark);
-        this.checkWin(row, col, this.currentGame.currentPlayer.mark);
-        this.takeTurns();
-      };
+      {
+        if ($(event.currentTarget).has('.mark').length)
+        { 
+          alert("This square already has a mark!  Try another square!"); 
+        } 
+        else 
+        { 
+          this.markSquare(event.target.id);
+          var row = event.target.id[3];
+          var col = event.target.id[7];
+          this.tallyMark(row, col, player.mark);
+          this.checkWin(row, col, player.mark);
+          this.model.takeTurns();
+        };
+      }
     }
   },
 
   markSquare: function(input) {
-    console.log($(input));
-    var squareElement = '#' + input; 
-    $(squareElement).append("<div class='mark'><img src=" + this.currentGame.currentPlayer.mark + "></div>");
+    var squareElement = '#' + input;
+    var markImage = $('<img></img>');
+    var markDiv = $('<div></div>');
+    markImage.attr('src', this.model.currentPlayer.mark);
+    markDiv.addClass('mark').append(markImage);
+    $(squareElement).append(markDiv);
     this.fillSquare('div.mark', 'img');
   },
 
-    fillSquare: function(container, item) {
+  fillSquare: function(container, item) {
     var fillClass = ($(container).height() > $(container).width()) 
     ? 'fillheight'
     : 'fillwidth';
     $(container).find(item).addClass(fillClass);
-    // console.log(item);
   },
 
-  takeTurns: function() {
-    if (this.currentGame.currentPlayer == this.currentGame.player1) 
-    {
-      this.currentGame.currentPlayer = this.currentGame.player2;
-    } 
-    else
-    {
-      this.currentGame.currentPlayer = this.currentGame.player1;
-    };
-  },
 
-  addMarkToSpace: function(row, col, mark) {
-    var space = this.currentGame.board.grid[row][col];
+  tallyMark: function(row, col, mark) {
+    var space = this.model.board.grid[row][col];
+    $('#prompt').hide();
     space.setMark(mark);
-    this.currentGame.playCounter += 1;
+    this.model.playCounter += 1;
   },
 
   checkWin: function(row, col, mark) {
-    if (this.currentGame.playCounter >= 5)
+    if (this.model.playCounter >= 5)
     {
-      this.currentGame.checkWinStatus(row, col, mark)
-      console.log(`Counter: ${this.currentGame.playCounter}`);
+      if (this.model.playCounter == 9 && this.model.returnWinStatus() == 'in progress')
+      {
+        this.showWinStatus(this.winImage.draw);
+      }
+      this.model.checkWinStatus(row, col, mark)
     }
-    if (this.currentGame.returnWinStatus() != 'in progress')
+    if (this.model.returnWinStatus() != 'in progress')
     {
-      console.log(this.currentGame.currentPlayer.name);
-      // alert(this.currentGame.returnWinStatus());
-      this.proclaimWin();
+      this.showWinStatus(this.winImage.won);
+      this.proclaimWinner();
     }
   }, 
 
-  proclaimWin: function() {
-    this.currentGame.setWinner(this.currentGame.currentPlayer);
-    this.highlightWinner(this.currentGame.currentPlayer);
-    $('#row2').append(`<img class='overlay' src=${this.winImage.won}>`);
+  showWinStatus: function(image) {
+    var win = $('<img></img>');
+    win.attr('class', 'overlay').attr('src', image);
+    $('#row2').append(win);
+  },
+
+  proclaimWinner: function() {
+    this.model.setWinner(this.model.currentPlayer);
+    this.highlightWinner(this.model.currentPlayer);
   },
 
   highlightWinner: function(winner) {
-    if (winner == this.currentGame.player1)
+    if (winner == this.model.player1)
     {
-      $('#player1').addClass('winner');
+      $('#player1').addClass('highlight');
     }
     else
     {
-      $('#player2').addClass('winner');
+      $('#player2').addClass('highlight');
     }
   },
-
-  startOver: function() {
-    
-  }
-
 
 
 });

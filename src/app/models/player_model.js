@@ -4,18 +4,21 @@ import _ from 'underscore';
 
 const Player = Backbone.Model.extend({
     
-  defaults: function(){
-    return {
-      name: '',
+  defaults: {
+      name: '?',
       mark: ''
-    };
   }, 
 
   initialize: function() {
+    this.on('change:name', this.reportNameChange());
+  },
+
+  reportNameChange: function() {
+    console.log(this.get('name'));
   },
 
   setName: function(name) {
-    this.name = name;
+    this.set('name', name);
   },
 
   setMark: function(mark) {
@@ -27,17 +30,17 @@ const Player = Backbone.Model.extend({
   },
 
   markImages: {
-    grass: 'images/squirrel-grass.jpg',
-    rocks: 'images/squirrel-rocks.jpg',
-    snow: 'images/squirrel-snow.jpg',
-    bugs: 'images/Bugs_Bunny.jpg',
-    elmer: 'images/Elmer_Fudd.jpg',
-    sam: 'images/Yosemite_Sam.jpg',
-    daffy: 'images/Daffy_Duck.jpg',
-    porky: 'images/Porky_Pig.jpg',
-    marvin: 'images/Marvin_the_Martian.jpg',
-    coyote: 'images/Wile_E._Coyote.jpg',
-    roadrunner: 'images/Roadrunner.jpg'
+    grass: 'assets/squirrel-grass.jpg',
+    rocks: 'assets/squirrel-rocks.jpg',
+    snow: 'assets/squirrel-snow.jpg',
+    bugs: 'assets/Bugs_Bunny.jpg',
+    elmer: 'assets/Elmer_Fudd.jpg',
+    sam: 'assets/Yosemite_Sam.jpg',
+    daffy: 'assets/Daffy_Duck.jpg',
+    porky: 'assets/Porky_Pig.jpg',
+    marvin: 'assets/Marvin_the_Martian.jpg',
+    coyote: 'assets/Wile_E._Coyote.jpg',
+    roadrunner: 'assets/Roadrunner.jpg'
   },
 
   names: {
@@ -52,7 +55,8 @@ const Player = Backbone.Model.extend({
     marvin: 'Marvin the Martian',
     coyote: 'Wile E. Coyote',
     roadrunner: 'Roadrunner'
-  }
+  },
+  
 
 }); 
 
