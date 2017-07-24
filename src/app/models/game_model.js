@@ -87,6 +87,7 @@ const Game = Backbone.Model.extend({
     {
       this.currentPlayer = this.player1;
     };
+    return true;
   },
 
 }); 

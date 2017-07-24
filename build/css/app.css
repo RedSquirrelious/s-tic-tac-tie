@@ -34,9 +34,6 @@ img#logo {
   width: auto;
 }
 
-.maybeChoose {
-  filter: grayscale(100%);  
-}
 
 .top-bar ul {
   background-color: white;
@@ -126,9 +123,14 @@ li.button {
   font-weight: bold;
 }
 
+.maybeChoose {
+  filter: grayscale(100%);  
+  border: solid red;
+}
+
 .picked {
   border: solid green;
-  filter: grayscale(100%);
+  /*filter: grayscale(100%);*/
 }
 
 .score {

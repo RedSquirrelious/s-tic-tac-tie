@@ -29,7 +29,7 @@ $(document).ready(function() {
     template: _.template($('#choice-list-template').html()),
   });
 
-  choiceView.promptPickCharacter(player1);
+  
 
   var player1 = new Player();
   var player2 = new Player();
@@ -38,6 +38,8 @@ $(document).ready(function() {
   game.addPlayers(player1, player2);
   game.setCurrentPlayer(player1);
    
+  choiceView.promptPickCharacter(player1);
+ 
   var p1 = new PlayerView({
     el: $('#player-list'),
     template: _.template($('#player-list-template').html()),
@@ -45,8 +47,9 @@ $(document).ready(function() {
     player2: player2   
   });
   
-  choiceView.render(); 
+ 
   board.render(); 
+  choiceView.render(); 
   p1.render();
 
 });    

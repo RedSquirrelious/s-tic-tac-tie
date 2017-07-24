@@ -24,13 +24,22 @@ const ChoiceListView = Backbone.View.extend({
     urgePick1: 'Pick a persona, Player1!',
     urgePick2: 'Pick a persona, Player2!',
     tryAgain: 'Oops!  Try again!',
-    pickedAlready: "You've already picked your character.  Maybe play a square instead?"
+    youPickedAlready: "You've already picked your character.  Maybe play a square instead?"
   },
 
   render: function() {
+    this.addLogo();
     this.listChoices();
     this.delegateEvents();
     return this;
+  },
+
+  addLogo: function() {
+    var logoImage = this.constructImage('logo', 'assets/tic-tac-toe-logo.jpg', 'Tic-Tac-Toe');
+    logoImage.attr('title', 'New Game');
+    var logoDestination = $('<li></li>');
+    logoDestination.append(logoImage);
+    this.el.append(logoDestination);
   },
 
   listChoices: function(){
@@ -40,7 +49,7 @@ const ChoiceListView = Backbone.View.extend({
     {
       var id = choices[choice].name.toLowerCase().replace(/\s+/g, '_');
 
-      var choiceImage = that.constructChoice(id, choices[choice].mark, choices[choice].name);
+      var choiceImage = that.constructImage(id, choices[choice].mark, choices[choice].name);
 
       var choiceDestination = $('<li></li>');
 
@@ -49,57 +58,132 @@ const ChoiceListView = Backbone.View.extend({
     }
   },
 
-  constructChoice: function(id, mark, name) {
+  constructImage: function(id, mark, name) {
     var choiceImage = $('<img></img>');
     choiceImage.attr('id', id).attr('src', mark).attr('alt', `Image of ${name}`).attr('title', name);
     return choiceImage;
   },
 
   promptPickCharacter: function(player) {
-
-    setTimeout(this.addPrompt(player), 1000);
+    if (this.validatePlayer(player))
+    {
+      console.log(player);
+      setTimeout(this.addPrompt(player), 1000);
+      return true;
+    }
   },
 
-  addPrompt: function(player) {
-    var prompt = this.messages.urgePick2;
-    if (player == this.model.parent.player1)
+  addPrompt: function(player=null) {
+    var prompt = this.messages.urgePick1;
+    if (player == this.model.parent.player2)
       { 
-        prompt = this.messages.urgePick1;
+        prompt = this.messages.urgePick2;
       }
     prompt += this.messages.howToPick;
     $('#prompt').html(prompt);
   },
 
+  // pickCharacter: function(event) {
+  //   var prompt = $('#prompt');
+  //   var promptText;
+  //   if (this.validatePlayer(this.model.parent.currentPlayer))
+  //   {
+  //     if (event.target.id != 'logo' && !$(event.currentTarget).hasClass('picked'))
+  //     { 
+  //       var player = this.model.parent.currentPlayer;
+  //       $(event.target).addClass('picked');
+  //       prompt.hide();
+  //       player.setName(event.target.title);
+  //       player.setMark(event.target.src);
+        
+  //       if (player == this.model.parent.player1)
+  //       {
+  //         var x = this.promptPickCharacter(player);
+  //       }
+  //         this.model.parent.takeTurns();
+  //       // this.model.parent.takeTurns();
+  //       // player = this.model.parent.currentPlayer;
+        
+
+  //       // if (player == this.model.parent.player1)
+  //       // {
+  //       //   var x = this.promptPickCharacter(player);
+  //       // }
+  //     }
+  //     else {
+  //       promptText = this.messages.tryAgain;
+  //     }
+  //   }
+  //   else {
+  //     promptText = this.messages.youPickedAlready;
+  //   }
+  //   if (event.target.id != 'logo')
+  //   {
+  //     prompt.show();
+  //     prompt.html(promptText);
+  //   }
+
+  //   if(promptText = this.messages.tryAgain)
+  //   {
+  //     setTimeout(function() { 
+  //       prompt.fadeOut('fast');
+  //     }, 1000); //
+  //   }
+  // },
+
   pickCharacter: function(event) {
     var prompt = $('#prompt');
-    var promptText;
-    if (this.validatePick(this.model.parent.currentPlayer))
+    var promptText = '';
+    // has the player already picked their character?
+    if (this.validatePlayer(this.model.parent.currentPlayer))
     {
-      if (event.target.id != 'logo' && !$(event.currentTarget).hasClass('picked'))
+      // is this pick suitable?
+      if (this.validatePick(event))
       { 
         var player = this.model.parent.currentPlayer;
         $(event.target).addClass('picked');
         prompt.hide();
         player.setName(event.target.title);
         player.setMark(event.target.src);
-        this.model.parent.takeTurns();
-        // this.promptPickCharacter('x');
+        
+        if (player == this.model.parent.player1)
+        {
+          var x = this.promptPickCharacter(this.model.parent.player2);
+        }
+          this.model.parent.takeTurns();
       }
+      // if this pick isn't suitable... if it's a logo or player1's choice
       else {
         promptText = this.messages.tryAgain;
       }
     }
+    // the player already picked a character
     else {
-      promptText = this.messages.pickedAlready;
+      promptText = this.messages.youPickedAlready;
     }
-    if (event.target.id != 'logo')
-    {
+
       prompt.show();
       prompt.html(promptText);
+
+      // if a valid player picks a bad square, fade this out
+    if (promptText = this.messages.tryAgain)
+    {
+      setTimeout(function() { 
+        prompt.fadeOut('fast');
+      }, 1000); //
     }
   },
 
-  validatePick: function(player) {
+  validatePick: function(event) {
+    var promptText;
+    if (event.target.id == 'logo' || $(event.currentTarget).hasClass('picked'))
+    {
+      return false;
+    }
+    return true;
+  },
+
+  validatePlayer: function(player) {
     if (player.get('name') == '?')
     {
       return true;
@@ -109,7 +193,6 @@ const ChoiceListView = Backbone.View.extend({
 
 // might or might not work depending on browser 
   highlightHover: function(event) {
-    console.log($(event.target));
     $(event.target).addClass('maybeChoose');
   },
 
