@@ -121,6 +121,13 @@ li.button {
 .highlight {
   color: red;
   font-weight: bold;
+  /*font-family: 'Gloria Hallelujah', cursive;*/
+  /*font-family: 'Rock Salt', cursive;*/
+}
+
+.winner {
+  color: red;
+  font-family: 'Rock Salt', cursive;
 }
 
 .maybeChoose {

@@ -111,11 +111,11 @@ const GameView = Backbone.View.extend({
   highlightWinner: function(winner) {
     if (winner == this.model.player1)
     {
-      $('#player1').addClass('highlight');
+      $('#player1').addClass('winner');
     }
     else
     {
-      $('#player2').addClass('highlight');
+      $('#player2').addClass('winner');
     }
   },
 

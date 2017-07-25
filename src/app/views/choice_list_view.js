@@ -77,7 +77,9 @@ const ChoiceListView = Backbone.View.extend({
     var prompt = this.messages.urgePick1;
     if (player == this.model.parent.player2)
       { 
+        console.log('well?')
         prompt = this.messages.urgePick2;
+        console.log(prompt);
       }
     prompt += this.messages.howToPick;
     $('#prompt').html(prompt);
@@ -133,7 +135,12 @@ const ChoiceListView = Backbone.View.extend({
 
   pickCharacter: function(event) {
     var prompt = $('#prompt');
-    var promptText = '';
+    // var promptText = '';
+    var promptText;
+    console.log(prompt.html());
+    {
+      prompt.hide();
+    }
     // has the player already picked their character?
     if (this.validatePlayer(this.model.parent.currentPlayer))
     {
@@ -148,6 +155,7 @@ const ChoiceListView = Backbone.View.extend({
         
         if (player == this.model.parent.player1)
         {
+          console.log('huh');
           var x = this.promptPickCharacter(this.model.parent.player2);
         }
           this.model.parent.takeTurns();
@@ -161,9 +169,14 @@ const ChoiceListView = Backbone.View.extend({
     else {
       promptText = this.messages.youPickedAlready;
     }
-
-      prompt.show();
-      prompt.html(promptText);
+    
+    // prevents the try again message from showing up again if player 2 picks a good pick
+    // after clicking on unsuitable images (player1's)
+    if (this.validatePlayer(this.model.parent.currentPlayer))
+      {
+        prompt.show();
+        prompt.html(promptText);
+      }
 
       // if a valid player picks a bad square, fade this out
     if (promptText = this.messages.tryAgain)
