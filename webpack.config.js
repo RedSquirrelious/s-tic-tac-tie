@@ -1,31 +1,38 @@
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: './index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
+
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
+
 module.exports = {
-  entry: ['babel-polyfill', './src/app.js'],
+  entry: './index.jsx',
   output: {
-    path: './build',
-    filename: 'app.bundle.js'
+    path: path.resolve('dist'),
+    filename: 'index_bundle.js'
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader'
-    }]
+    rules: [
+      {
+        test: /\js$/,
+        exclude: '/node-modules',
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\jsx$/,
+        exclude: '/node-modules',
+        use: {
+          loader: 'babel-loader'
+        }
+      },
+    ]
   },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: './build',
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    port: 8081
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin({
-      multiStep: true
-    }),
-    new DashboardPlugin()
-  ]
-};
+  plugins: [new DashboardPlugin(), HtmlWebpackPluginConfig]
+}
