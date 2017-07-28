@@ -1,14 +1,14 @@
 {
   "name": "tic-tac-toe",
   "version": "1.0.0",
-  "description": "Tic-Tac-Toe game written in JavaScript and Backbone",
+  "description": "Tic-Tac-Toe game written in JavaScript and Backbone implementing TDD with Jasmine",
   "main": "./bin/app.bundle.js",
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server",
     "test": "jasmine",
     "repl": "babel-node"
   },
-  "author": "Sasha Pierson, loosely based off Ada Developers Academy",
+  "author": "Sasha Pierson, loosely based off Ada Developers Academy exercise",
   "license": "MIT",
   "repository": "https://github.com/RedSquirrelious/s-tic-tac-tie",
   "bugs": {
