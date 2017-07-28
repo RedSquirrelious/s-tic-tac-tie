@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <title>Tic-Tac-Toe</title>
     <meta charset="utf-8">
-
-    <link rel="stylesheet" href="css/foundation.css">
-    <link rel="stylesheet" href="css/app.css">
-    <!-- <link rel="sheet" type="text/css" href="css/reset.css">  -->
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt" rel="stylesheet">
+    <link rel="stylesheet" href="./build/css/foundation.css">
+    <link rel="stylesheet" href="./build/css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt" rel="stylesheet">
   </head>
   <body>
     <nav class='top-bar'>
@@ -24,12 +21,12 @@
               </h2>
           </section>
           <section id='game' class='row'>
-          <div id='scoreP1' class='score'>
+<!--           <div id='scoreP1' class='score'>
             <h4>Score</h4>
-          </div>
+          </div> -->
             <div id='board'>
               <section class="row-container">
-                    <ul id='row0'>
+                    <ul>
                         <li id='row0col0' class='square'>
                         </li>
                         <li id='row0col1' class='square'>
@@ -39,7 +36,7 @@
                     </ul>    
               </section>  
               <section class="row-container">
-                <ul id='row1'>
+                <ul id="row2">
                     <li id='row1col0' class='square'>
                     </li>
                     <li id='row1col1' class='square'>
@@ -49,7 +46,7 @@
                 </ul>  
               </section>  
               <section class="row-container">
-                    <ul id='row2'>
+                    <ul>
                         <li id='row2col0' class='square'>
                         </li>
                         <li id='row2col1' class='square'>
@@ -59,9 +56,9 @@
                     </ul> 
               </section>
             </div> 
-            <div id='scoreP2' class='score'>
+<!--             <div id='scoreP2' class='score'>
               <h4>Score</h4>
-            </div>
+            </div> -->
           </section>
       </main>
 
@@ -81,25 +78,6 @@
           </div>
       </script>
 
-
-
-<!--       <script type='text/template' id='board-template'>
-      <ul class="row0">
-          <li><%- row0col0 %></li>
-          <li><%- row0col1 %></li>
-          <li><%- row0col2 %></li>
-      </ul>
-      <ul class="row1">
-          <li><%- row1col0 %> </li>
-          <li><%- row1col1 %></li>
-          <li><%- row1col2 %></li>
-      </ul>
-      <ul class="row2">
-          <li><%- row2col0 %></li>
-          <li> <%- row2col1 %></li>
-          <li> <%- row2col2 %></li>
-      </ul>
-      </script> -->
 
 
 

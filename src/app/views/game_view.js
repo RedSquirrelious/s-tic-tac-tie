@@ -25,8 +25,8 @@ const GameView = Backbone.View.extend({
   },
 
   winImage: {
-    draw: 'assets/draw.jpg',
-    won: "assets/winner.jpg"
+    draw: 'build/assets/draw.jpg',
+    won: 'build/assets/winner.jpg'
   },
 
   play: function(event) {

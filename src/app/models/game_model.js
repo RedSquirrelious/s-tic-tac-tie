@@ -30,24 +30,11 @@ const Game = Backbone.Model.extend({
     return this;
   }, 
 
-  // addPlayerPersonas: function(choiceList) {
-  //   this.playerPersonas = choiceList;
-  // },
   
   addPlayers: function(player1, player2=null) {
     this.player1 = player1;
     this.player2 = player2;
   },
-
-  // namePlayer: function(player, name) {
-  //   if (player = this.player1)
-  //   {
-  //     player1.setName(name);
-  //   }
-  //   else {
-  //     player2.setName(name);
-  //   }
-  // },
 
   setCurrentPlayer: function(player) { 
     this.currentPlayer = player;

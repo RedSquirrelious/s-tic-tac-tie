@@ -19,6 +19,10 @@ const ChoiceListView = Backbone.View.extend({
     'mouseleave img': 'removeHoverEffect'
   },
 
+  logoImages: {
+    logoLocation: 'build/assets/tic-tac-toe-logo.jpg'
+  },
+
   messages: {
     howToPick: '  Click on one of the characters above!',
     urgePick1: 'Pick a persona, Player1!',
@@ -35,7 +39,7 @@ const ChoiceListView = Backbone.View.extend({
   },
 
   addLogo: function() {
-    var logoImage = this.constructImage('logo', 'assets/tic-tac-toe-logo.jpg', 'Tic-Tac-Toe');
+    var logoImage = this.constructImage('logo', this.logoImages.logoLocation, 'Tic-Tac-Toe');
     logoImage.attr('title', 'New Game');
     var logoDestination = $('<li></li>');
     logoDestination.append(logoImage);
@@ -85,53 +89,6 @@ const ChoiceListView = Backbone.View.extend({
     $('#prompt').html(prompt);
   },
 
-  // pickCharacter: function(event) {
-  //   var prompt = $('#prompt');
-  //   var promptText;
-  //   if (this.validatePlayer(this.model.parent.currentPlayer))
-  //   {
-  //     if (event.target.id != 'logo' && !$(event.currentTarget).hasClass('picked'))
-  //     { 
-  //       var player = this.model.parent.currentPlayer;
-  //       $(event.target).addClass('picked');
-  //       prompt.hide();
-  //       player.setName(event.target.title);
-  //       player.setMark(event.target.src);
-        
-  //       if (player == this.model.parent.player1)
-  //       {
-  //         var x = this.promptPickCharacter(player);
-  //       }
-  //         this.model.parent.takeTurns();
-  //       // this.model.parent.takeTurns();
-  //       // player = this.model.parent.currentPlayer;
-        
-
-  //       // if (player == this.model.parent.player1)
-  //       // {
-  //       //   var x = this.promptPickCharacter(player);
-  //       // }
-  //     }
-  //     else {
-  //       promptText = this.messages.tryAgain;
-  //     }
-  //   }
-  //   else {
-  //     promptText = this.messages.youPickedAlready;
-  //   }
-  //   if (event.target.id != 'logo')
-  //   {
-  //     prompt.show();
-  //     prompt.html(promptText);
-  //   }
-
-  //   if(promptText = this.messages.tryAgain)
-  //   {
-  //     setTimeout(function() { 
-  //       prompt.fadeOut('fast');
-  //     }, 1000); //
-  //   }
-  // },
 
   pickCharacter: function(event) {
     var prompt = $('#prompt');
