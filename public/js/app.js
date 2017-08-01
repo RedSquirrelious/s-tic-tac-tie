@@ -1,14 +1,15 @@
 import $ from 'jquery';    
 import Backbone from 'backbone';    
 import _ from 'underscore';   
-import Game from 'app/models/game_model';
-import Space from 'app/models/space_model';    
-import Board from 'app/models/board_model';
-import Player from 'app/models/player_model';   
-import GameView from 'app/views/game_view';    
-import PlayerView from 'app/views/player_view'; 
-import ChoiceList from 'app/models/choice_list_model';
-import ChoiceListView from 'app/views/choice_list_view';    
+import Game from './app/models/game_model';
+import Space from './app/models/space_model';    
+import Board from './app/models/board_model';
+import Player from './app/models/player_model';   
+import GameView from './app/views/game_view';    
+import PlayerView from './app/views/player_view'; 
+import ChoiceList from './app/models/choice_list_model';
+import ChoiceListView from './app/views/choice_list_view';    
+
 
 
 $(document).ready(function() {
@@ -17,7 +18,6 @@ $(document).ready(function() {
   var board = new GameView(   
     {   
       el: $('#game'),
-      // template: _.template($('#board-template').html()),
       model: game,
       playerPersonas: game.playerPersonas
     }   
@@ -26,7 +26,7 @@ $(document).ready(function() {
   var choiceView = new ChoiceListView({
     el: $('#choices'),
     model: game.playerPersonas,
-    template: _.template($('#choice-list-template').html()),
+    template: require('ejs-compiled!/views/choice-template.ejs');
   });
 
   

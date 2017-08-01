@@ -3,9 +3,9 @@ var webpack = require('webpack');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
-  entry: ['babel-polyfill', './src/app.js'],
+  entry: ['babel-polyfill', './public/js/app.js'],
   output: {
-    path: './',
+    path: path.resolve(__dirname, 'public/build'),
     filename: 'app.bundle.js'
   },
     module: {
@@ -18,17 +18,18 @@ module.exports = {
     ]
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: './',
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    port: 8081
-  },
+  // devServer: {
+  //   contentBase: './',
+  //   historyApiFallback: true,
+  //   hot: true,
+  //   inline: true,
+  //   port: 8081
+  // },
   plugins: [
     new webpack.HotModuleReplacementPlugin({
       multiStep: true
     }),
     new DashboardPlugin()
-  ]
+  ],
+  target: 'node'
 };

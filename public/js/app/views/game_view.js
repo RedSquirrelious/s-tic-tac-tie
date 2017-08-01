@@ -2,14 +2,16 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
 
-import Player from 'app/models/player_model';
-import Game from 'app/models/game_model';
+import Player from './../models/player_model';
+import Game from './../models/game_model';
 
 
-const GameView = Backbone.View.extend({
-  
+const GameView = Backbone.View.extend({ 
+  el: $('#game'),
+  template: require('ejs-compiled!/views/board-template'),
+
+
   initialize: function(options) {
-    // this.template = options.template;
     this.listenTo(this.model, 'change', this.render );
     this.model = options.model;
   },
@@ -19,14 +21,14 @@ const GameView = Backbone.View.extend({
   },
 
   render: function() {
-    var that = this;
+    this.$el.html(this.template);
     this.delegateEvents();
     return this;
   },
 
   winImage: {
-    draw: 'build/assets/draw.jpg',
-    won: 'build/assets/winner.jpg'
+    draw: '/public/assets/draw.jpg',
+    won: '/public/assets/winner.jpg'
   },
 
   play: function(event) {

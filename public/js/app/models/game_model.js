@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Board from 'app/models/board_model';
-import Player from 'app/models/player_model';
-import ChoiceList from 'app/models/choice_list_model';
+import Board from './board_model';
+import Player from './player_model';
+import ChoiceList from './choice_list_model';
 
 const Game = Backbone.Model.extend({
   defaults: 

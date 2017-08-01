@@ -1,9 +1,7 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Spaces from 'app/collections/board_collection';
-// import Player from 'app/models/player_model';
-import Space from 'app/models/space_model';
+import Space from './space_model';
 
 const Board = Backbone.Model.extend({
   defaults: {

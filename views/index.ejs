@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="<%= vendorCss %>">
+    <link rel="stylesheet" href="<%= appCss %>">
+    <link href="<%= font %>" rel="stylesheet">
+  </head>
+  <body>
+    <nav class='top-bar'>
+      <ul id='choices' class='title-area'>
+        <%- include choice-template %>
+      </ul>
+    </nav>
+        <main>
+          <section class='row'>
+            <h5 id='prompt' class='highlight'></h5>
+          </section>
+          <section id='players' class='row'>
+              <%- include player-list-template %>
+          </section>
+          <section id='game' class='row'>
+            <%- include board-template %>
+          </section>
+      </main>
+
+
+
+
+    <script src="<%= mainJs %>" charset="utf-8"></script>
+
+  </body>
+</html>

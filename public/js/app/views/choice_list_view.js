@@ -1,10 +1,11 @@
 import $ from 'jquery';
 import Backbone from 'backbone';
 import _ from 'underscore';
-import ChoiceList from 'app/models/choice_list_model';
+import ChoiceList from './../models/choice_list_model';
 
 
 const ChoiceListView = Backbone.View.extend({
+  template: require('ebs-compiled!/views/choice-template');
 
   initialize: function(options) {
     this.model = options.model;
@@ -20,7 +21,7 @@ const ChoiceListView = Backbone.View.extend({
   },
 
   logoImages: {
-    logoLocation: 'build/assets/tic-tac-toe-logo.jpg'
+    logoLocation: '/public/assets/tic-tac-toe-logo.jpg'
   },
 
   messages: {
@@ -32,8 +33,10 @@ const ChoiceListView = Backbone.View.extend({
   },
 
   render: function() {
-    this.addLogo();
+    // this.addLogo();
+    var logo = this.addLogo();
     this.listChoices();
+    this.template()
     this.delegateEvents();
     return this;
   },
@@ -44,6 +47,7 @@ const ChoiceListView = Backbone.View.extend({
     var logoDestination = $('<li></li>');
     logoDestination.append(logoImage);
     this.el.append(logoDestination);
+    // return logoDestination;
   },
 
   listChoices: function(){
