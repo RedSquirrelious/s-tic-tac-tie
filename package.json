@@ -10,8 +10,8 @@
     "heroku-postbuild": "webpack -p --config ./webpack.config.prod.js --progress"
   },
   "engines": {
-    "node": "^8.2.1",
-    "npm": "^5.3.0"
+    "node": "8.2.1",
+    "npm": "5.3.0"
   },
   "author": "Sasha Pierson, loosely based off Ada Developers Academy exercise",
   "license": "MIT",
