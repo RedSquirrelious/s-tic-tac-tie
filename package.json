@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server",
     "test": "jasmine",
-    "repl": "babel-node"
+    "repl": "babel-node",
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "author": "Sasha Pierson, loosely based off Ada Developers Academy exercise",
   "license": "MIT",
