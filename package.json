@@ -31,11 +31,11 @@
     "jasmine": "^2.5.2",
     "jasmine-expect": "^3.0.1",
     "jquery": "^3.1.1",
-    "webpack": "^1.13.3",
     "webpack-dashboard": "^0.2.0",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "babel-polyfill": "6.23.0"
+    "babel-polyfill": "6.23.0",
+    "webpack": "^1.13.3"
   }
 }
