@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tic-Tac-Toe</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/foundation.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Rock+Salt" rel="stylesheet">
+  </head>
+  <body>
+    <nav class='top-bar'>
+      <ul id='choices' class='title-area'>
+      </ul>
+    </nav>
+        <main>
+          <section class='row'>
+            <h5 id='prompt' class='highlight'></h5>
+          </section>
+          <section id='players' class='row'>
+              <h2 id='player-list'>
+              </h2>
+          </section>
+          <section id='game' class='row'>
+<!--           <div id='scoreP1' class='score'>
+            <h4>Score</h4>
+          </div> -->
+            <div id='board'>
+              <section class="row-container">
+                    <ul>
+                        <li id='row0col0' class='square'>
+                        </li>
+                        <li id='row0col1' class='square'>
+                        </li>
+                        <li id='row0col2' class='square'>
+                        </li>
+                    </ul>    
+              </section>  
+              <section class="row-container">
+                <ul id="row2">
+                    <li id='row1col0' class='square'>
+                    </li>
+                    <li id='row1col1' class='square'>
+                    </li>
+                    <li id='row1col2' class='square'>
+                    </li>
+                </ul>  
+              </section>  
+              <section class="row-container">
+                    <ul>
+                        <li id='row2col0' class='square'>
+                        </li>
+                        <li id='row2col1' class='square'>
+                        </li>
+                        <li id='row2col2' class='square'>
+                        </li>
+                    </ul> 
+              </section>
+            </div> 
+<!--             <div id='scoreP2' class='score'>
+              <h4>Score</h4>
+            </div> -->
+          </section>
+      </main>
+
+
+<!-- UNDERSCORE TEMPLATES -->
+
+      <script type='text/template' id='prompt-template'>
+        <h2><%- promptP1%></h2>
+        <h2><%- promptP2%></h2>
+      </script>
+
+      <script type='text/template' id='player-list-template'>
+          <div id='list' class='row'>
+            <h2 id='player1' class='small-12 large-5 columns'><%- nameP1 %></h2>
+            <h2 class='small-12 large-2 columns'>vs.</h2>
+            <h2 id='player2' class='small-12 large-5 columns'><%- nameP2 %></h2>
+          </div>
+      </script>
+
+
+
+
+        <script type='text/template' id='choice-list-template'>
+        <ul><%- choiceList %></ul>
+      </script>
+
+
+    <script src="./build/app.bundle.js" charset="utf-8"></script>
+
+  </body>
+</html>

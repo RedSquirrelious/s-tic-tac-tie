@@ -8,17 +8,17 @@ const ChoiceList = Backbone.Model.extend({
   },
 
   markImages: {
-    grass: 'build/assets/squirrel-grass.jpg',
-    rocks: 'build/assets/squirrel-rocks.jpg',
-    snow: 'build/assets/squirrel-snow.jpg',
-    bugs: 'build/assets/Bugs_Bunny.jpg',
-    elmer: 'build/assets/Elmer_Fudd.jpg',
-    sam: 'build/assets/Yosemite_Sam.jpg',
-    daffy: 'build/assets/Daffy_Duck.jpg',
-    porky: 'build/assets/Porky_Pig.jpg',
-    marvin: 'build/assets/Marvin_the_Martian.jpg',
-    coyote: 'build/assets/Wile_E._Coyote.jpg',
-    roadrunner: 'build/assets/Roadrunner.jpg'
+    grass: './assets/squirrel-grass.jpg',
+    rocks: './assets/squirrel-rocks.jpg',
+    snow: './assets/squirrel-snow.jpg',
+    bugs: './assets/Bugs_Bunny.jpg',
+    elmer: './assets/Elmer_Fudd.jpg',
+    sam: './assets/Yosemite_Sam.jpg',
+    daffy: './assets/Daffy_Duck.jpg',
+    porky: './assets/Porky_Pig.jpg',
+    marvin: './assets/Marvin_the_Martian.jpg',
+    coyote: './assets/Wile_E._Coyote.jpg',
+    roadrunner: './assets/Roadrunner.jpg'
   },
 
   names: {

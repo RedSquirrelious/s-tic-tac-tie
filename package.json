@@ -4,11 +4,11 @@
   "description": "Tic-Tac-Toe game written in JavaScript and Backbone implementing TDD with Jasmine",
   "main": "./bin/app.bundle.js",
   "scripts": {
-    "start": "node app.bundle.js",
+    "start": "node server",
     "devstart": "webpack-dashboard -- webpack-dev-server",
     "test": "jasmine",
     "repl": "babel-node",
-    "heroku-postbuild": "webpack -p --config ./webpack.config.prod.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "engines": {
     "node": "8.2.1",
@@ -37,6 +37,8 @@
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
+    "express": "4.15.3",
+    "path": "0.12.7",
     "webpack": "^1.13.3"
   }
 }
