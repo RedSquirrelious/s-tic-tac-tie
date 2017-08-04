@@ -20,7 +20,7 @@ const ChoiceListView = Backbone.View.extend({
   },
 
   logoImages: {
-    logoLocation: 'build/assets/tic-tac-toe-logo.jpg'
+    logoLocation: './assets/tic-tac-toe-logo.jpg'
   },
 
   messages: {
