@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node app.bundle.js",
     "devstart": "webpack-dashboard -- webpack-dev-server",
+    "build": "NODE_ENV=production && webpack -p",
     "test": "jasmine",
     "repl": "babel-node",
     "heroku-postbuild": "webpack -p --config ./webpack.config.prod.js --progress"
